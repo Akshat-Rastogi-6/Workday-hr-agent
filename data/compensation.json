@@ -1,0 +1,1805 @@
+{
+  "total": 200,
+  "data": [
+    {
+      "worker": {
+        "id": "47229389571aa8766c307511b2b9437a",
+        "descriptor": "Angel Henschel"
+      },
+      "annualBasePay": 212500.0,
+      "currency": "GBP",
+      "nationalId": "FN819600"
+    },
+    {
+      "worker": {
+        "id": "0b1f9163ce9ff57f43b7a3a69a8dca03",
+        "descriptor": "Leanne Hoffman"
+      },
+      "annualBasePay": 4954300.0,
+      "currency": "INR",
+      "nationalId": "RJ940265"
+    },
+    {
+      "worker": {
+        "id": "e2acf72f9e574f7aa0ee89aed453dd32",
+        "descriptor": "Tom Davis"
+      },
+      "annualBasePay": 3867500.0,
+      "currency": "INR",
+      "nationalId": "YF940781"
+    },
+    {
+      "worker": {
+        "id": "3b982ef8daf61a26146d3f31fc377a4c",
+        "descriptor": "Marit Rust"
+      },
+      "annualBasePay": 3673600.0,
+      "currency": "INR",
+      "nationalId": "RD341316"
+    },
+    {
+      "worker": {
+        "id": "4458a885ab9099a435a240ae5af30553",
+        "descriptor": "Gotthold Klapp"
+      },
+      "annualBasePay": 3971900.0,
+      "currency": "INR",
+      "nationalId": "DY192832"
+    },
+    {
+      "worker": {
+        "id": "fd5166e6451b4cf36123fdf77656af72",
+        "descriptor": "Stephanie Richardson"
+      },
+      "annualBasePay": 85100.0,
+      "currency": "GBP",
+      "nationalId": "TU564139"
+    },
+    {
+      "worker": {
+        "id": "448aaa9e66b2bc5b50c187fcce177b4e",
+        "descriptor": "Abbie Randhawa"
+      },
+      "annualBasePay": 92200.0,
+      "currency": "EUR",
+      "nationalId": "BL238849"
+    },
+    {
+      "worker": {
+        "id": "3f22faf823bed01d43cf2fde24933b83",
+        "descriptor": "Janaki Turner"
+      },
+      "annualBasePay": 99400.0,
+      "currency": "USD",
+      "nationalId": "ME101226"
+    },
+    {
+      "worker": {
+        "id": "827050a82369b584ff5e9ff0ff50bde4",
+        "descriptor": "Lakshmi Wadhwa"
+      },
+      "annualBasePay": 88900.0,
+      "currency": "GBP",
+      "nationalId": "BK184514"
+    },
+    {
+      "worker": {
+        "id": "ff01cf99988c24c961b1cd2262801c45",
+        "descriptor": "Aarush Otto"
+      },
+      "annualBasePay": 71500.0,
+      "currency": "EUR",
+      "nationalId": "WK489325"
+    },
+    {
+      "worker": {
+        "id": "1c8eaee95715bd6fa4161293c4c2e2e3",
+        "descriptor": "Carol Bahl"
+      },
+      "annualBasePay": 1961000.0,
+      "currency": "INR",
+      "nationalId": "UF303911"
+    },
+    {
+      "worker": {
+        "id": "deda4e161b3dbd5ce9a1fa6f81f76d1c",
+        "descriptor": "Tiffany Clarke"
+      },
+      "annualBasePay": 82300.0,
+      "currency": "GBP",
+      "nationalId": "WU489638"
+    },
+    {
+      "worker": {
+        "id": "04fc6d827d15438552fbe43b99546eb4",
+        "descriptor": "Graeme Prakash"
+      },
+      "annualBasePay": 78800.0,
+      "currency": "EUR",
+      "nationalId": "LJ133150"
+    },
+    {
+      "worker": {
+        "id": "d0e6e6607c69dee1bb5e4bcf15ed6269",
+        "descriptor": "Joan Bailey"
+      },
+      "annualBasePay": 104800.0,
+      "currency": "EUR",
+      "nationalId": "QF051834"
+    },
+    {
+      "worker": {
+        "id": "6c52c49f9b49bd26df57c59a8715a103",
+        "descriptor": "Sheila Wood"
+      },
+      "annualBasePay": 2710300.0,
+      "currency": "INR",
+      "nationalId": "BA631165"
+    },
+    {
+      "worker": {
+        "id": "7394988f847fd9b4e64d1bcb702753a1",
+        "descriptor": "Chatura Brown"
+      },
+      "annualBasePay": 2091800.0,
+      "currency": "INR",
+      "nationalId": "LR338726"
+    },
+    {
+      "worker": {
+        "id": "0f1259e0a18ff6b6b535106e122c9a56",
+        "descriptor": "Zaid Ramos"
+      },
+      "annualBasePay": 57100.0,
+      "currency": "EUR",
+      "nationalId": "NZ132677"
+    },
+    {
+      "worker": {
+        "id": "ef7ddc76b92da22b21df306f8a0b3c33",
+        "descriptor": "Franklin Galloway"
+      },
+      "annualBasePay": 78800.0,
+      "currency": "GBP",
+      "nationalId": "ND687234"
+    },
+    {
+      "worker": {
+        "id": "6c6fa6115ab33edf6e595ed3a8b317fa",
+        "descriptor": "Julie Williams"
+      },
+      "annualBasePay": 102800.0,
+      "currency": "EUR",
+      "nationalId": "ER081219"
+    },
+    {
+      "worker": {
+        "id": "3fa7f1041bf90e27dc96925eccf3a171",
+        "descriptor": "Sophie David"
+      },
+      "annualBasePay": 2704400.0,
+      "currency": "INR",
+      "nationalId": "UQ916998"
+    },
+    {
+      "worker": {
+        "id": "8ce21ea3db20a56edc815fe7ceda8bbb",
+        "descriptor": "Aimee Henck"
+      },
+      "annualBasePay": 107500.0,
+      "currency": "USD",
+      "nationalId": "NK475107"
+    },
+    {
+      "worker": {
+        "id": "dd59ba7136b824817b3a4e3e7c52fa17",
+        "descriptor": "Charles Lowe"
+      },
+      "annualBasePay": 64700.0,
+      "currency": "USD",
+      "nationalId": "TT354278"
+    },
+    {
+      "worker": {
+        "id": "fed4057dbb026576f512c4c3b253d218",
+        "descriptor": "Elizabeth Spieß"
+      },
+      "annualBasePay": 108200.0,
+      "currency": "USD",
+      "nationalId": "MN118244"
+    },
+    {
+      "worker": {
+        "id": "0cd620c20ea2622b504867babf7b539b",
+        "descriptor": "Hansjürgen Pärtzelt"
+      },
+      "annualBasePay": 88000.0,
+      "currency": "EUR",
+      "nationalId": "XI164005"
+    },
+    {
+      "worker": {
+        "id": "acdabacc1165e21098543881118a9d29",
+        "descriptor": "Gottfried Sane"
+      },
+      "annualBasePay": 69200.0,
+      "currency": "GBP",
+      "nationalId": "JB280598"
+    },
+    {
+      "worker": {
+        "id": "90b2b633956b8c0ca8499b926b5252e3",
+        "descriptor": "Luke Knappe"
+      },
+      "annualBasePay": 72100.0,
+      "currency": "EUR",
+      "nationalId": "VJ315869"
+    },
+    {
+      "worker": {
+        "id": "c07a30f2edd4253b50f0fd0a750cab75",
+        "descriptor": "Ben Wallace"
+      },
+      "annualBasePay": 1668300.0,
+      "currency": "INR",
+      "nationalId": "CE634216"
+    },
+    {
+      "worker": {
+        "id": "eeea163e21e8ac6843e42caf8181a8cc",
+        "descriptor": "Marc Palla"
+      },
+      "annualBasePay": 50600.0,
+      "currency": "GBP",
+      "nationalId": "XR036541"
+    },
+    {
+      "worker": {
+        "id": "ce9e1a11fcbb4e59fbddcf7c9c96e9ec",
+        "descriptor": "Florence Yadav"
+      },
+      "annualBasePay": 1665400.0,
+      "currency": "INR",
+      "nationalId": "MB429401"
+    },
+    {
+      "worker": {
+        "id": "be0f051b1b66b5a9e3c436571d8cbbac",
+        "descriptor": "Jana Mälzer"
+      },
+      "annualBasePay": 2185400.0,
+      "currency": "INR",
+      "nationalId": "RU406088"
+    },
+    {
+      "worker": {
+        "id": "e7c421c740497b717d106c6081627cf1",
+        "descriptor": "Julie Boase"
+      },
+      "annualBasePay": 1749900.0,
+      "currency": "INR",
+      "nationalId": "ZS148465"
+    },
+    {
+      "worker": {
+        "id": "295d6fbf430f801dfad409e2a319dcb4",
+        "descriptor": "Birthe Lucas"
+      },
+      "annualBasePay": 77500.0,
+      "currency": "GBP",
+      "nationalId": "TS994680"
+    },
+    {
+      "worker": {
+        "id": "8d7248e2951f58d05e84f058d5a804eb",
+        "descriptor": "Sharon Mohaupt"
+      },
+      "annualBasePay": 63400.0,
+      "currency": "EUR",
+      "nationalId": "QO872148"
+    },
+    {
+      "worker": {
+        "id": "1a50aec3aabc25fa3fe12e47ae9bec36",
+        "descriptor": "Domenico Davies"
+      },
+      "annualBasePay": 77900.0,
+      "currency": "GBP",
+      "nationalId": "DA003791"
+    },
+    {
+      "worker": {
+        "id": "2d534dd0cf8ebc5accc56569f9e8a369",
+        "descriptor": "Bethan Talwar"
+      },
+      "annualBasePay": 48100.0,
+      "currency": "GBP",
+      "nationalId": "DD016328"
+    },
+    {
+      "worker": {
+        "id": "b386f7a4c991603f28c13091444d610b",
+        "descriptor": "Adrian Deol"
+      },
+      "annualBasePay": 48900.0,
+      "currency": "GBP",
+      "nationalId": "KV798687"
+    },
+    {
+      "worker": {
+        "id": "3a43b2badf0f06cbcb9bc326d20eac17",
+        "descriptor": "Shivani Weitzel"
+      },
+      "annualBasePay": 2947600.0,
+      "currency": "INR",
+      "nationalId": "TS873471"
+    },
+    {
+      "worker": {
+        "id": "89456f27d7fa2d8dfb2ca025adf4e62d",
+        "descriptor": "Abdul Juncken"
+      },
+      "annualBasePay": 62500.0,
+      "currency": "USD",
+      "nationalId": "AV362316"
+    },
+    {
+      "worker": {
+        "id": "ba81edd9587ef3446f3f920c98b8e4cc",
+        "descriptor": "Ojasvi Clark"
+      },
+      "annualBasePay": 83600.0,
+      "currency": "EUR",
+      "nationalId": "WY967054"
+    },
+    {
+      "worker": {
+        "id": "006ed6e36fa17735b572f3d00b5cea6a",
+        "descriptor": "Thomas Kanda"
+      },
+      "annualBasePay": 3235600.0,
+      "currency": "INR",
+      "nationalId": "IN065627"
+    },
+    {
+      "worker": {
+        "id": "aa0b7b14f2e9702d11e9cdaa6e6981a3",
+        "descriptor": "Rebecca Miller"
+      },
+      "annualBasePay": 2875200.0,
+      "currency": "INR",
+      "nationalId": "DU204653"
+    },
+    {
+      "worker": {
+        "id": "688c7015aab97e494f2d479681d2c7de",
+        "descriptor": "Kirstin Mall"
+      },
+      "annualBasePay": 5270800.0,
+      "currency": "INR",
+      "nationalId": "PE708053"
+    },
+    {
+      "worker": {
+        "id": "2c8d0e44e71e43a6bf85bf0ead64b56c",
+        "descriptor": "Karen Ryan"
+      },
+      "annualBasePay": 109800.0,
+      "currency": "USD",
+      "nationalId": "DS327193"
+    },
+    {
+      "worker": {
+        "id": "9b4e2c249479e1e6c9277d9b6e0d2648",
+        "descriptor": "Krista Geisel"
+      },
+      "annualBasePay": 89500.0,
+      "currency": "GBP",
+      "nationalId": "ZT190496"
+    },
+    {
+      "worker": {
+        "id": "83f4a9a948a639d015b52908a8aa7158",
+        "descriptor": "Keith Warner"
+      },
+      "annualBasePay": 93700.0,
+      "currency": "GBP",
+      "nationalId": "EG905865"
+    },
+    {
+      "worker": {
+        "id": "3eae00320bd4a9900640be0f25b8fd4b",
+        "descriptor": "Aleksandr Suri"
+      },
+      "annualBasePay": 68100.0,
+      "currency": "GBP",
+      "nationalId": "NZ726284"
+    },
+    {
+      "worker": {
+        "id": "25c73c443e75c3b4664fa6637e8f8095",
+        "descriptor": "Udyati Loyal"
+      },
+      "annualBasePay": 44400.0,
+      "currency": "USD",
+      "nationalId": "QY473799"
+    },
+    {
+      "worker": {
+        "id": "8498e113b227462cf53d4330cdda24ba",
+        "descriptor": "Andy Nair"
+      },
+      "annualBasePay": 65100.0,
+      "currency": "GBP",
+      "nationalId": "JA545494"
+    },
+    {
+      "worker": {
+        "id": "714c7df4e4347d51c1581092f335cba3",
+        "descriptor": "Graham Atkinson"
+      },
+      "annualBasePay": 2614100.0,
+      "currency": "INR",
+      "nationalId": "OZ777014"
+    },
+    {
+      "worker": {
+        "id": "3f4b1a70c074718e425a609f7337c599",
+        "descriptor": "Stewart Mühle"
+      },
+      "annualBasePay": 64000.0,
+      "currency": "USD",
+      "nationalId": "HU574443"
+    },
+    {
+      "worker": {
+        "id": "458f1f193c07c57449257af1b6aae05b",
+        "descriptor": "Guy Newton"
+      },
+      "annualBasePay": 75400.0,
+      "currency": "EUR",
+      "nationalId": "GM749894"
+    },
+    {
+      "worker": {
+        "id": "54b4a48268586eba6a34c85410714d51",
+        "descriptor": "Henry Gieß"
+      },
+      "annualBasePay": 57200.0,
+      "currency": "GBP",
+      "nationalId": "OW400842"
+    },
+    {
+      "worker": {
+        "id": "5a0cdd7cf1578470018267c47a1b5806",
+        "descriptor": "Harshil Andrews"
+      },
+      "annualBasePay": 72100.0,
+      "currency": "USD",
+      "nationalId": "EZ520471"
+    },
+    {
+      "worker": {
+        "id": "076e2bba7c5308bf6f92f25e45df16b6",
+        "descriptor": "Ethan Hernandez"
+      },
+      "annualBasePay": 71300.0,
+      "currency": "GBP",
+      "nationalId": "OX186999"
+    },
+    {
+      "worker": {
+        "id": "907bfe36978648f864de82e6e82c7d7b",
+        "descriptor": "Shravya Mishra"
+      },
+      "annualBasePay": 45500.0,
+      "currency": "EUR",
+      "nationalId": "KP913341"
+    },
+    {
+      "worker": {
+        "id": "53ac2ab974672cd9362f5e5c53cd6268",
+        "descriptor": "Lynn Moore"
+      },
+      "annualBasePay": 71300.0,
+      "currency": "USD",
+      "nationalId": "ER403447"
+    },
+    {
+      "worker": {
+        "id": "fff9f5850d557b618a175dfebfc00dc8",
+        "descriptor": "Arthur Field"
+      },
+      "annualBasePay": 54700.0,
+      "currency": "EUR",
+      "nationalId": "MV421024"
+    },
+    {
+      "worker": {
+        "id": "2702878b9f0fda8d05379ff6d6d7b3b8",
+        "descriptor": "Theobald Harrison"
+      },
+      "annualBasePay": 60400.0,
+      "currency": "GBP",
+      "nationalId": "CB887719"
+    },
+    {
+      "worker": {
+        "id": "bf780e3ff6b751f79b7492459b1bc895",
+        "descriptor": "Dörte Bauer"
+      },
+      "annualBasePay": 43100.0,
+      "currency": "GBP",
+      "nationalId": "PC490278"
+    },
+    {
+      "worker": {
+        "id": "32c5bd89b70b3420f1043785658b2523",
+        "descriptor": "Hans-Bernd Swamy"
+      },
+      "annualBasePay": 93800.0,
+      "currency": "USD",
+      "nationalId": "AS655125"
+    },
+    {
+      "worker": {
+        "id": "c85aca4690e0f4a0fbdd3933cbd58bf6",
+        "descriptor": "Bhavya Bansal"
+      },
+      "annualBasePay": 74900.0,
+      "currency": "EUR",
+      "nationalId": "QI451680"
+    },
+    {
+      "worker": {
+        "id": "6efb63b11b0498637d7ddbedd284476c",
+        "descriptor": "Odika Lopez"
+      },
+      "annualBasePay": 89800.0,
+      "currency": "USD",
+      "nationalId": "SC703482"
+    },
+    {
+      "worker": {
+        "id": "89c5b31aeb6c1016cee624d09dac6e83",
+        "descriptor": "Jairaj Dudley"
+      },
+      "annualBasePay": 2114000.0,
+      "currency": "INR",
+      "nationalId": "HD808613"
+    },
+    {
+      "worker": {
+        "id": "c01f36bf3e6dd58b7367c28de1b294de",
+        "descriptor": "Deborah Morley"
+      },
+      "annualBasePay": 2399900.0,
+      "currency": "INR",
+      "nationalId": "JY677378"
+    },
+    {
+      "worker": {
+        "id": "4223623bcc3ebdde5ad5cf06364d7c87",
+        "descriptor": "June Taylor"
+      },
+      "annualBasePay": 87000.0,
+      "currency": "USD",
+      "nationalId": "LQ840449"
+    },
+    {
+      "worker": {
+        "id": "8e2007247d137018680bac63b856d035",
+        "descriptor": "Manthan Yohannan"
+      },
+      "annualBasePay": 72500.0,
+      "currency": "GBP",
+      "nationalId": "SP886753"
+    },
+    {
+      "worker": {
+        "id": "3e493f43b118f68d6786d50638ba8abc",
+        "descriptor": "Vivaan Bassi"
+      },
+      "annualBasePay": 2343400.0,
+      "currency": "INR",
+      "nationalId": "LV627028"
+    },
+    {
+      "worker": {
+        "id": "3b048a8b405bfdc94e7ed827455ac762",
+        "descriptor": "Morgan Chaudhry"
+      },
+      "annualBasePay": 57900.0,
+      "currency": "USD",
+      "nationalId": "NS621745"
+    },
+    {
+      "worker": {
+        "id": "b97e670346c8adfe7bf47042bd1531c8",
+        "descriptor": "Faris Steuer"
+      },
+      "annualBasePay": 76300.0,
+      "currency": "GBP",
+      "nationalId": "OV809134"
+    },
+    {
+      "worker": {
+        "id": "039f3a254d6168bd2defe1935c62b3a2",
+        "descriptor": "Ryan Hodges"
+      },
+      "annualBasePay": 41100.0,
+      "currency": "GBP",
+      "nationalId": "WX400504"
+    },
+    {
+      "worker": {
+        "id": "92f5df7b0323d342df6a8f931a432f0a",
+        "descriptor": "Madhav Hill"
+      },
+      "annualBasePay": 78500.0,
+      "currency": "USD",
+      "nationalId": "LJ196937"
+    },
+    {
+      "worker": {
+        "id": "93b7a88612f70c977de31a516694c343",
+        "descriptor": "Bethany Mies"
+      },
+      "annualBasePay": 43500.0,
+      "currency": "EUR",
+      "nationalId": "WL748217"
+    },
+    {
+      "worker": {
+        "id": "9b37a22b6a8a616fc3b290d08edddfcd",
+        "descriptor": "Felicia Krishna"
+      },
+      "annualBasePay": 80500.0,
+      "currency": "EUR",
+      "nationalId": "WK671369"
+    },
+    {
+      "worker": {
+        "id": "0f6b40d09efba58b9191b3634e2d6645",
+        "descriptor": "Hildegard Barkholz"
+      },
+      "annualBasePay": 97400.0,
+      "currency": "USD",
+      "nationalId": "MZ909743"
+    },
+    {
+      "worker": {
+        "id": "8d4f5d272c7f0b793d67cde92834e4c0",
+        "descriptor": "Heinz-Otto Houghton"
+      },
+      "annualBasePay": 40200.0,
+      "currency": "EUR",
+      "nationalId": "UI047095"
+    },
+    {
+      "worker": {
+        "id": "dc0f2fcfb3f6fe0d48603b32b4fb0eb9",
+        "descriptor": "Renee Weinhold"
+      },
+      "annualBasePay": 2551400.0,
+      "currency": "INR",
+      "nationalId": "KQ285884"
+    },
+    {
+      "worker": {
+        "id": "26242b40a5cb63a2398d1ca68b6870b5",
+        "descriptor": "Chakrika Drewes"
+      },
+      "annualBasePay": 49300.0,
+      "currency": "EUR",
+      "nationalId": "AQ368516"
+    },
+    {
+      "worker": {
+        "id": "b321bf214dd8eb85b04d337677fc9703",
+        "descriptor": "Shawn Sauer"
+      },
+      "annualBasePay": 57800.0,
+      "currency": "EUR",
+      "nationalId": "UN137098"
+    },
+    {
+      "worker": {
+        "id": "176132ed069f14f140181c6e9a8cfa3c",
+        "descriptor": "Eileen Reid"
+      },
+      "annualBasePay": 2525700.0,
+      "currency": "INR",
+      "nationalId": "HG120047"
+    },
+    {
+      "worker": {
+        "id": "7872bdeb2cd94cbbc19ad58cc35b1c8c",
+        "descriptor": "Shannon McCarthy"
+      },
+      "annualBasePay": 69000.0,
+      "currency": "EUR",
+      "nationalId": "AR926179"
+    },
+    {
+      "worker": {
+        "id": "5230dfbd5553b2fe6889803e5913f9d3",
+        "descriptor": "Hannah Williams"
+      },
+      "annualBasePay": 55600.0,
+      "currency": "USD",
+      "nationalId": "MH585064"
+    },
+    {
+      "worker": {
+        "id": "0964fbbf8cd321b0c2b01cfdd045dd1c",
+        "descriptor": "Gavin Graham"
+      },
+      "annualBasePay": 165700.0,
+      "currency": "USD",
+      "nationalId": "NL329318"
+    },
+    {
+      "worker": {
+        "id": "764414fd8ae769edde8ede0ba85c6e4a",
+        "descriptor": "Donald Wohlgemut"
+      },
+      "annualBasePay": 91100.0,
+      "currency": "EUR",
+      "nationalId": "HQ422842"
+    },
+    {
+      "worker": {
+        "id": "445dcc38341c64940d366dfcc28ebd70",
+        "descriptor": "David Zobel"
+      },
+      "annualBasePay": 103900.0,
+      "currency": "USD",
+      "nationalId": "HH024026"
+    },
+    {
+      "worker": {
+        "id": "8d03c91e4f8d5238288b78b5b5b453ca",
+        "descriptor": "Thomas Peukert"
+      },
+      "annualBasePay": 83600.0,
+      "currency": "GBP",
+      "nationalId": "DE908470"
+    },
+    {
+      "worker": {
+        "id": "4ab7706eb77350caeec259dc7f95897c",
+        "descriptor": "Pooja Henry"
+      },
+      "annualBasePay": 53500.0,
+      "currency": "GBP",
+      "nationalId": "NO592124"
+    },
+    {
+      "worker": {
+        "id": "9970cf60ebff8d1530cbd7556232b17a",
+        "descriptor": "Ralf Metz"
+      },
+      "annualBasePay": 45900.0,
+      "currency": "GBP",
+      "nationalId": "VD836736"
+    },
+    {
+      "worker": {
+        "id": "b9de7a3a486822b900a81de9d20f87d0",
+        "descriptor": "Ojasvi Edwards"
+      },
+      "annualBasePay": 2504000.0,
+      "currency": "INR",
+      "nationalId": "FB527111"
+    },
+    {
+      "worker": {
+        "id": "c34b9fbb8d4a75b8551ac8ea585a0afa",
+        "descriptor": "Julie Ehlert"
+      },
+      "annualBasePay": 82300.0,
+      "currency": "USD",
+      "nationalId": "MT165604"
+    },
+    {
+      "worker": {
+        "id": "69288e92c68a152fdb23aa8c3bcabf85",
+        "descriptor": "Edwin Nash"
+      },
+      "annualBasePay": 83600.0,
+      "currency": "USD",
+      "nationalId": "OZ585149"
+    },
+    {
+      "worker": {
+        "id": "9716108ef72169bb809627182051acef",
+        "descriptor": "Atharv Baum"
+      },
+      "annualBasePay": 51600.0,
+      "currency": "EUR",
+      "nationalId": "QZ550229"
+    },
+    {
+      "worker": {
+        "id": "f84f16b3a79fbfafdef5768968f45bce",
+        "descriptor": "Donald Davis"
+      },
+      "annualBasePay": 64400.0,
+      "currency": "GBP",
+      "nationalId": "XK752545"
+    },
+    {
+      "worker": {
+        "id": "aca2b148da330aa1541cdfcdda0d4a5f",
+        "descriptor": "Nicole Fraser"
+      },
+      "annualBasePay": 69900.0,
+      "currency": "EUR",
+      "nationalId": "AR476797"
+    },
+    {
+      "worker": {
+        "id": "a193c4b23c19e71d118405ad9e11d2cd",
+        "descriptor": "Sally Reed"
+      },
+      "annualBasePay": 63800.0,
+      "currency": "EUR",
+      "nationalId": "DA840369"
+    },
+    {
+      "worker": {
+        "id": "4ca9cf07b1aa0f6a2a96e1e27194eae2",
+        "descriptor": "Josh Perkins"
+      },
+      "annualBasePay": 48000.0,
+      "currency": "EUR",
+      "nationalId": "YI107622"
+    },
+    {
+      "worker": {
+        "id": "ae8a781390e0a95b697c392387fa841a",
+        "descriptor": "Donna Boucsein"
+      },
+      "annualBasePay": 47700.0,
+      "currency": "GBP",
+      "nationalId": "KZ071596"
+    },
+    {
+      "worker": {
+        "id": "4104a8b5a34db7c5760debbb3b70b3a1",
+        "descriptor": "Bimala Sullivan"
+      },
+      "annualBasePay": 38800.0,
+      "currency": "GBP",
+      "nationalId": "LZ516136"
+    },
+    {
+      "worker": {
+        "id": "966b1964fcd6bdca5876fd09f1faf665",
+        "descriptor": "Randy Weinhage"
+      },
+      "annualBasePay": 80100.0,
+      "currency": "USD",
+      "nationalId": "MX218188"
+    },
+    {
+      "worker": {
+        "id": "5be4bf519269869861a117293cb98350",
+        "descriptor": "Nikola Smith"
+      },
+      "annualBasePay": 64300.0,
+      "currency": "EUR",
+      "nationalId": "DW292127"
+    },
+    {
+      "worker": {
+        "id": "7f2984f5bec39a379b3d74bde91e314e",
+        "descriptor": "Ekantika Flantz"
+      },
+      "annualBasePay": 63800.0,
+      "currency": "EUR",
+      "nationalId": "GE744905"
+    },
+    {
+      "worker": {
+        "id": "c16d83edad81f8bd402913ec9ef2b93e",
+        "descriptor": "Viktor Barad"
+      },
+      "annualBasePay": 45900.0,
+      "currency": "GBP",
+      "nationalId": "DL119986"
+    },
+    {
+      "worker": {
+        "id": "21a4344fbb7bee035d678bb1945ef2e4",
+        "descriptor": "Shannon Storey"
+      },
+      "annualBasePay": 64300.0,
+      "currency": "EUR",
+      "nationalId": "PL071518"
+    },
+    {
+      "worker": {
+        "id": "e9ff1cae41c8ca8c2a1f955ad499da99",
+        "descriptor": "John Sarna"
+      },
+      "annualBasePay": 2297300.0,
+      "currency": "INR",
+      "nationalId": "YO466590"
+    },
+    {
+      "worker": {
+        "id": "39c1e262f76c8edec11012662408a6dc",
+        "descriptor": "Carsten Dehmel"
+      },
+      "annualBasePay": 71000.0,
+      "currency": "EUR",
+      "nationalId": "WT925192"
+    },
+    {
+      "worker": {
+        "id": "5e5ba13d746cdb771fa382e8895ccd99",
+        "descriptor": "Kai Collins"
+      },
+      "annualBasePay": 1865400.0,
+      "currency": "INR",
+      "nationalId": "BX281685"
+    },
+    {
+      "worker": {
+        "id": "e25d36eb9e9a9f83066803ee78b2b549",
+        "descriptor": "Hans-Adolf Cook"
+      },
+      "annualBasePay": 56500.0,
+      "currency": "GBP",
+      "nationalId": "XI221418"
+    },
+    {
+      "worker": {
+        "id": "23c86d301dde7969688613dba6348e78",
+        "descriptor": "Ebony Anderson"
+      },
+      "annualBasePay": 1423100.0,
+      "currency": "INR",
+      "nationalId": "RU927065"
+    },
+    {
+      "worker": {
+        "id": "be3e6e57f30a9e32aba4fc035efa9c5b",
+        "descriptor": "Louise Weller"
+      },
+      "annualBasePay": 88400.0,
+      "currency": "USD",
+      "nationalId": "DX473597"
+    },
+    {
+      "worker": {
+        "id": "687a48509d9b62317d45d8efd56ce8ea",
+        "descriptor": "Leopoldine Thakkar"
+      },
+      "annualBasePay": 63300.0,
+      "currency": "EUR",
+      "nationalId": "JG924075"
+    },
+    {
+      "worker": {
+        "id": "8b621d415e09a9eeaf88bdecfb1e143b",
+        "descriptor": "Justin Sharpe"
+      },
+      "annualBasePay": 68500.0,
+      "currency": "EUR",
+      "nationalId": "ZG375060"
+    },
+    {
+      "worker": {
+        "id": "f899924698de8ebba3b5cecea446be72",
+        "descriptor": "Hubert Bumb"
+      },
+      "annualBasePay": 56800.0,
+      "currency": "GBP",
+      "nationalId": "SE515220"
+    },
+    {
+      "worker": {
+        "id": "dea45c19d0243d723748967f961d33ba",
+        "descriptor": "Diana Sen"
+      },
+      "annualBasePay": 46500.0,
+      "currency": "GBP",
+      "nationalId": "BH432898"
+    },
+    {
+      "worker": {
+        "id": "a93b12cd1c24220e2cabd7e7cc6b66e5",
+        "descriptor": "Ian Eberhardt"
+      },
+      "annualBasePay": 1609100.0,
+      "currency": "INR",
+      "nationalId": "IB971179"
+    },
+    {
+      "worker": {
+        "id": "bde13c1b20733f6d0d6a05b343ef2016",
+        "descriptor": "Gareth Lorch"
+      },
+      "annualBasePay": 44600.0,
+      "currency": "GBP",
+      "nationalId": "XE396218"
+    },
+    {
+      "worker": {
+        "id": "ba2c98ce0b19f88e9d77a45ef206c269",
+        "descriptor": "Peter Bassi"
+      },
+      "annualBasePay": 67300.0,
+      "currency": "GBP",
+      "nationalId": "XL051531"
+    },
+    {
+      "worker": {
+        "id": "b65feea97d8242641ba362e7afa415e5",
+        "descriptor": "Frank-Michael Bell"
+      },
+      "annualBasePay": 54800.0,
+      "currency": "USD",
+      "nationalId": "CS772217"
+    },
+    {
+      "worker": {
+        "id": "87d292a698eeac2bfe9fecaa6182f347",
+        "descriptor": "Samuel Young"
+      },
+      "annualBasePay": 2343900.0,
+      "currency": "INR",
+      "nationalId": "WX874034"
+    },
+    {
+      "worker": {
+        "id": "56c438e469efafb13a7e8e14e359eee1",
+        "descriptor": "Michelle Heydrich"
+      },
+      "annualBasePay": 78200.0,
+      "currency": "USD",
+      "nationalId": "SF676527"
+    },
+    {
+      "worker": {
+        "id": "112fa61279699ed2ec48bf55afd380c4",
+        "descriptor": "Stefanie Carsten"
+      },
+      "annualBasePay": 43000.0,
+      "currency": "GBP",
+      "nationalId": "FU928451"
+    },
+    {
+      "worker": {
+        "id": "8fca7b6a8fc42092f4e559e596229348",
+        "descriptor": "Leonardo Sandhu"
+      },
+      "annualBasePay": 53000.0,
+      "currency": "EUR",
+      "nationalId": "OY705964"
+    },
+    {
+      "worker": {
+        "id": "4ffca6b199b479d449a214aef7e8f8e5",
+        "descriptor": "Charles Patla"
+      },
+      "annualBasePay": 82900.0,
+      "currency": "EUR",
+      "nationalId": "XP970213"
+    },
+    {
+      "worker": {
+        "id": "5e187b248e676a01d86a646059a1120e",
+        "descriptor": "Othmar Bali"
+      },
+      "annualBasePay": 148300.0,
+      "currency": "EUR",
+      "nationalId": "HX557192"
+    },
+    {
+      "worker": {
+        "id": "d4578ad9a867a096edd877c89be71737",
+        "descriptor": "Dipta Hering"
+      },
+      "annualBasePay": 80900.0,
+      "currency": "EUR",
+      "nationalId": "XQ786814"
+    },
+    {
+      "worker": {
+        "id": "deaf528d2e7098380190262059dcabd0",
+        "descriptor": "Tanish Täsche"
+      },
+      "annualBasePay": 3046200.0,
+      "currency": "INR",
+      "nationalId": "ZR217271"
+    },
+    {
+      "worker": {
+        "id": "3712f2d187cdb6a1bf012e32177d6e7e",
+        "descriptor": "Gloria Tröst"
+      },
+      "annualBasePay": 94900.0,
+      "currency": "EUR",
+      "nationalId": "HM422583"
+    },
+    {
+      "worker": {
+        "id": "0cbd3c039e2aa4acc122b5b3284c03d2",
+        "descriptor": "Frank Bal"
+      },
+      "annualBasePay": 50900.0,
+      "currency": "GBP",
+      "nationalId": "TZ782911"
+    },
+    {
+      "worker": {
+        "id": "585d3f861d2324e6832920b7c143f426",
+        "descriptor": "Nirja Borah"
+      },
+      "annualBasePay": 51500.0,
+      "currency": "GBP",
+      "nationalId": "OL778528"
+    },
+    {
+      "worker": {
+        "id": "0e0630cd996d5c50fc04a168652ffb49",
+        "descriptor": "Callum Thakkar"
+      },
+      "annualBasePay": 52500.0,
+      "currency": "GBP",
+      "nationalId": "HS422535"
+    },
+    {
+      "worker": {
+        "id": "6e3f683abf3c51407f54a51101fa964e",
+        "descriptor": "John Eberth"
+      },
+      "annualBasePay": 66900.0,
+      "currency": "EUR",
+      "nationalId": "QN829922"
+    },
+    {
+      "worker": {
+        "id": "6fac16730ad45230bdf66ba5dc9c96de",
+        "descriptor": "Mercedes Bryan"
+      },
+      "annualBasePay": 51800.0,
+      "currency": "USD",
+      "nationalId": "OB943969"
+    },
+    {
+      "worker": {
+        "id": "532401fcf758dce20556daea67b03283",
+        "descriptor": "Bimala Nette"
+      },
+      "annualBasePay": 72200.0,
+      "currency": "EUR",
+      "nationalId": "AE471027"
+    },
+    {
+      "worker": {
+        "id": "1422373f862268d16683e10796c044d0",
+        "descriptor": "Samar auch Schlauchin"
+      },
+      "annualBasePay": 68600.0,
+      "currency": "USD",
+      "nationalId": "GU562588"
+    },
+    {
+      "worker": {
+        "id": "e7ea8d5a31a3ac4d828c37e787d5b7be",
+        "descriptor": "Natalie Adams"
+      },
+      "annualBasePay": 65000.0,
+      "currency": "EUR",
+      "nationalId": "KU046963"
+    },
+    {
+      "worker": {
+        "id": "9a36d1ec2c6a6e9a328067a14187222b",
+        "descriptor": "Hans-Herbert Stephenson"
+      },
+      "annualBasePay": 39900.0,
+      "currency": "GBP",
+      "nationalId": "PN701687"
+    },
+    {
+      "worker": {
+        "id": "50ee7a92a09151e0f891b0c3dd3f487e",
+        "descriptor": "Benedikt Campbell"
+      },
+      "annualBasePay": 1394200.0,
+      "currency": "INR",
+      "nationalId": "XC162456"
+    },
+    {
+      "worker": {
+        "id": "09a0a0f673b0a0917634c1694f76e388",
+        "descriptor": "Charan Evans"
+      },
+      "annualBasePay": 60800.0,
+      "currency": "EUR",
+      "nationalId": "HI878499"
+    },
+    {
+      "worker": {
+        "id": "925817b7cf501889e8b77f7b7321bf6b",
+        "descriptor": "Phillip Roht"
+      },
+      "annualBasePay": 63100.0,
+      "currency": "EUR",
+      "nationalId": "CI986800"
+    },
+    {
+      "worker": {
+        "id": "812a1f9b15969802b6dd6257fb7d9f1c",
+        "descriptor": "Magda Venkataraman"
+      },
+      "annualBasePay": 1337000.0,
+      "currency": "INR",
+      "nationalId": "VT595269"
+    },
+    {
+      "worker": {
+        "id": "68a51c68632dbb5e486bb6bfeafde7d9",
+        "descriptor": "Amelie Mistry"
+      },
+      "annualBasePay": 1362900.0,
+      "currency": "INR",
+      "nationalId": "ME516940"
+    },
+    {
+      "worker": {
+        "id": "da003f16b9469bcf4082cbb948bddb3e",
+        "descriptor": "Waltrud Atkinson"
+      },
+      "annualBasePay": 57000.0,
+      "currency": "USD",
+      "nationalId": "BC230913"
+    },
+    {
+      "worker": {
+        "id": "f020e992b576255e98549f222102f9c9",
+        "descriptor": "Severin Ali"
+      },
+      "annualBasePay": 86500.0,
+      "currency": "USD",
+      "nationalId": "QE028385"
+    },
+    {
+      "worker": {
+        "id": "5cd3336904aac1b75ca0c428822c4d32",
+        "descriptor": "Dipta Nicholls"
+      },
+      "annualBasePay": 61600.0,
+      "currency": "USD",
+      "nationalId": "JT497334"
+    },
+    {
+      "worker": {
+        "id": "19e45c6ac9c23e69d82c75654bb907ec",
+        "descriptor": "Joel Tlustek"
+      },
+      "annualBasePay": 77400.0,
+      "currency": "EUR",
+      "nationalId": "KR758441"
+    },
+    {
+      "worker": {
+        "id": "29890880277d1be96070b6a198e52499",
+        "descriptor": "Megha Wirth"
+      },
+      "annualBasePay": 44900.0,
+      "currency": "GBP",
+      "nationalId": "NM415747"
+    },
+    {
+      "worker": {
+        "id": "72ecf16ec8a723e9bfa016c2c09cb506",
+        "descriptor": "Sybilla Etzler"
+      },
+      "annualBasePay": 1730200.0,
+      "currency": "INR",
+      "nationalId": "GA308330"
+    },
+    {
+      "worker": {
+        "id": "c733230448223120c4f9eccd7630a8a7",
+        "descriptor": "Iris Chaudhry"
+      },
+      "annualBasePay": 84200.0,
+      "currency": "USD",
+      "nationalId": "SP677345"
+    },
+    {
+      "worker": {
+        "id": "5f07c1a5dfc620ce7b07fd31a4244f23",
+        "descriptor": "Rebecca Pearson"
+      },
+      "annualBasePay": 48700.0,
+      "currency": "EUR",
+      "nationalId": "LV262067"
+    },
+    {
+      "worker": {
+        "id": "25b8a42f836b15c7e7c225da73069588",
+        "descriptor": "Petra Smith"
+      },
+      "annualBasePay": 1440300.0,
+      "currency": "INR",
+      "nationalId": "DR788728"
+    },
+    {
+      "worker": {
+        "id": "5fbbf0b1808389c8657e01c90da23e5c",
+        "descriptor": "Nathan Fröhlich"
+      },
+      "annualBasePay": 52100.0,
+      "currency": "USD",
+      "nationalId": "LN205493"
+    },
+    {
+      "worker": {
+        "id": "d46b415deada79a34970ed9a09ce3cfb",
+        "descriptor": "Prisha Christoph"
+      },
+      "annualBasePay": 43400.0,
+      "currency": "GBP",
+      "nationalId": "QY227530"
+    },
+    {
+      "worker": {
+        "id": "8c7e6f422646eaf9d5c0244d3735262d",
+        "descriptor": "Katie Jüttner"
+      },
+      "annualBasePay": 2297600.0,
+      "currency": "INR",
+      "nationalId": "TK453017"
+    },
+    {
+      "worker": {
+        "id": "9f708368cb3cf8caa39257316b79afcc",
+        "descriptor": "Yadavi Stumpf"
+      },
+      "annualBasePay": 41900.0,
+      "currency": "GBP",
+      "nationalId": "JD593327"
+    },
+    {
+      "worker": {
+        "id": "9d6429320066853d6de299a14a90cd0c",
+        "descriptor": "Senol Yogi"
+      },
+      "annualBasePay": 67500.0,
+      "currency": "GBP",
+      "nationalId": "HD878519"
+    },
+    {
+      "worker": {
+        "id": "0b251279785ac5d0df92a62163f4c69d",
+        "descriptor": "Marion O'Brien"
+      },
+      "annualBasePay": 66500.0,
+      "currency": "EUR",
+      "nationalId": "DI971870"
+    },
+    {
+      "worker": {
+        "id": "c1b5b5cabc3536df94f79dbac5811d2d",
+        "descriptor": "Tanmayi Hansen"
+      },
+      "annualBasePay": 44900.0,
+      "currency": "EUR",
+      "nationalId": "BW403910"
+    },
+    {
+      "worker": {
+        "id": "2285b2efcfbe4fe92ea9c542a1b970d0",
+        "descriptor": "Amber Michael"
+      },
+      "annualBasePay": 79200.0,
+      "currency": "USD",
+      "nationalId": "YC462265"
+    },
+    {
+      "worker": {
+        "id": "d0be73eefd37253965f202f983f02dc7",
+        "descriptor": "Keya Vega"
+      },
+      "annualBasePay": 1758000.0,
+      "currency": "INR",
+      "nationalId": "UO128682"
+    },
+    {
+      "worker": {
+        "id": "5e368127cca1b45c1fdd980a45f18619",
+        "descriptor": "Katelyn Mitschke"
+      },
+      "annualBasePay": 2046400.0,
+      "currency": "INR",
+      "nationalId": "MU337524"
+    },
+    {
+      "worker": {
+        "id": "84ef4324cc1b4157ec9f9c545e0a72ab",
+        "descriptor": "Antonio Babu"
+      },
+      "annualBasePay": 52200.0,
+      "currency": "USD",
+      "nationalId": "PV190790"
+    },
+    {
+      "worker": {
+        "id": "53f28f11147f65701a43db54523ae993",
+        "descriptor": "Richard Powell"
+      },
+      "annualBasePay": 1862600.0,
+      "currency": "INR",
+      "nationalId": "PT395995"
+    },
+    {
+      "worker": {
+        "id": "e95f176cdebac186ba1082170ad7c9a2",
+        "descriptor": "Irene Ali"
+      },
+      "annualBasePay": 77600.0,
+      "currency": "USD",
+      "nationalId": "YH687056"
+    },
+    {
+      "worker": {
+        "id": "5d01f55f67fd64c4a334058aabd2b512",
+        "descriptor": "Hermine Rege"
+      },
+      "annualBasePay": 179100.0,
+      "currency": "EUR",
+      "nationalId": "TJ287334"
+    },
+    {
+      "worker": {
+        "id": "3c6a3174113634a520509c6208e895d7",
+        "descriptor": "Dalbir Saha"
+      },
+      "annualBasePay": 84700.0,
+      "currency": "USD",
+      "nationalId": "FI435175"
+    },
+    {
+      "worker": {
+        "id": "5ef787b8f2e6195f732e2016add702c9",
+        "descriptor": "Lee Kostolzin"
+      },
+      "annualBasePay": 76500.0,
+      "currency": "GBP",
+      "nationalId": "TA983735"
+    },
+    {
+      "worker": {
+        "id": "f5e4a4713fe68c9c4758367ba6499cdc",
+        "descriptor": "Karl Burgess"
+      },
+      "annualBasePay": 2673200.0,
+      "currency": "INR",
+      "nationalId": "DI638546"
+    },
+    {
+      "worker": {
+        "id": "ff11c8ba36ee1640723ef466b43bd27f",
+        "descriptor": "Leszek Klingelhöfer"
+      },
+      "annualBasePay": 1732200.0,
+      "currency": "INR",
+      "nationalId": "CK753556"
+    },
+    {
+      "worker": {
+        "id": "ff4c96d671f2ce8fb69f68c3e60fd420",
+        "descriptor": "Jacob Green"
+      },
+      "annualBasePay": 48700.0,
+      "currency": "GBP",
+      "nationalId": "FJ353693"
+    },
+    {
+      "worker": {
+        "id": "28524385d9f2dd0d4cc9f5f2e42e5037",
+        "descriptor": "Joachim Swaminathan"
+      },
+      "annualBasePay": 1738300.0,
+      "currency": "INR",
+      "nationalId": "PD228728"
+    },
+    {
+      "worker": {
+        "id": "06ba8cd37e7838c9ca55e38b3c9abe10",
+        "descriptor": "Mary Landry"
+      },
+      "annualBasePay": 45700.0,
+      "currency": "GBP",
+      "nationalId": "GD231203"
+    },
+    {
+      "worker": {
+        "id": "b807d78ab788f5d1ffe575f665edcfe3",
+        "descriptor": "Burckhard Sura"
+      },
+      "annualBasePay": 1453800.0,
+      "currency": "INR",
+      "nationalId": "BG008484"
+    },
+    {
+      "worker": {
+        "id": "8471b4b0ae1b9f697740d83173318749",
+        "descriptor": "Praneel Hull"
+      },
+      "annualBasePay": 63800.0,
+      "currency": "EUR",
+      "nationalId": "FX984546"
+    },
+    {
+      "worker": {
+        "id": "272c058884a2576c1fc905f8d4d60735",
+        "descriptor": "Tripti Scott"
+      },
+      "annualBasePay": 40300.0,
+      "currency": "EUR",
+      "nationalId": "ED016668"
+    },
+    {
+      "worker": {
+        "id": "8d03f17af4d375c1a29319fa3240d7a1",
+        "descriptor": "Jacqueline Porter"
+      },
+      "annualBasePay": 1664400.0,
+      "currency": "INR",
+      "nationalId": "SK918033"
+    },
+    {
+      "worker": {
+        "id": "b87b63849fddde2ea8a2b7ad2bd3cdcd",
+        "descriptor": "Anika Glass"
+      },
+      "annualBasePay": 39200.0,
+      "currency": "GBP",
+      "nationalId": "WT250392"
+    },
+    {
+      "worker": {
+        "id": "93a74792c561b8dca4364fcdf2d3f761",
+        "descriptor": "Faraj Fröhlich"
+      },
+      "annualBasePay": 41900.0,
+      "currency": "EUR",
+      "nationalId": "VW856218"
+    },
+    {
+      "worker": {
+        "id": "7ba245884d560a3df4e7069aa4540937",
+        "descriptor": "Connor Bull"
+      },
+      "annualBasePay": 1843600.0,
+      "currency": "INR",
+      "nationalId": "WJ504773"
+    },
+    {
+      "worker": {
+        "id": "343ada2a76e5ae787bf7e1d36a662fce",
+        "descriptor": "Rachana Davies"
+      },
+      "annualBasePay": 43700.0,
+      "currency": "USD",
+      "nationalId": "TY311426"
+    },
+    {
+      "worker": {
+        "id": "8fc85fc083d5bceb5edbb8eec2baf0e0",
+        "descriptor": "Janet Klingelhöfer"
+      },
+      "annualBasePay": 36500.0,
+      "currency": "GBP",
+      "nationalId": "FL475412"
+    },
+    {
+      "worker": {
+        "id": "9d896047dd39d7936257a4a2f204be89",
+        "descriptor": "Saumya Chauhan"
+      },
+      "annualBasePay": 1900600.0,
+      "currency": "INR",
+      "nationalId": "AS819956"
+    },
+    {
+      "worker": {
+        "id": "7781321e83c501cbfef7d9ea7f8e5483",
+        "descriptor": "Lipika Hardy"
+      },
+      "annualBasePay": 38300.0,
+      "currency": "GBP",
+      "nationalId": "FJ622444"
+    },
+    {
+      "worker": {
+        "id": "0cf0374c0c74dc0f5a57553995560a2d",
+        "descriptor": "Gary Linke"
+      },
+      "annualBasePay": 46400.0,
+      "currency": "GBP",
+      "nationalId": "MD543799"
+    },
+    {
+      "worker": {
+        "id": "ba3df7ff43b47ee5e1e89e7e22498f66",
+        "descriptor": "Derek Rush"
+      },
+      "annualBasePay": 53000.0,
+      "currency": "USD",
+      "nationalId": "TU575692"
+    },
+    {
+      "worker": {
+        "id": "734a6ca38116e3fc62e7c1a612d2fa06",
+        "descriptor": "Catherine Gierschner"
+      },
+      "annualBasePay": 1325000.0,
+      "currency": "INR",
+      "nationalId": "YZ793564"
+    },
+    {
+      "worker": {
+        "id": "56ce4b42fc9e1dcbcb7e62685f89ed12",
+        "descriptor": "Ercan Wright"
+      },
+      "annualBasePay": 51700.0,
+      "currency": "USD",
+      "nationalId": "RF737416"
+    },
+    {
+      "worker": {
+        "id": "cdd0b4d4554227deb6adf48b2314d0c8",
+        "descriptor": "Ashleigh Hendriks"
+      },
+      "annualBasePay": 50000.0,
+      "currency": "EUR",
+      "nationalId": "LZ661797"
+    },
+    {
+      "worker": {
+        "id": "d7b4c294bd44089d9dd2f9defd98fe33",
+        "descriptor": "Balhaar Tintzmann"
+      },
+      "annualBasePay": 50600.0,
+      "currency": "USD",
+      "nationalId": "WV529096"
+    },
+    {
+      "worker": {
+        "id": "1c0f0bdcac7e937c54cc1e2a5e4cb287",
+        "descriptor": "Hitesh Garcia"
+      },
+      "annualBasePay": 54100.0,
+      "currency": "EUR",
+      "nationalId": "JW756798"
+    },
+    {
+      "worker": {
+        "id": "c86c6544a7d4cf50f791f1e543f9cd6b",
+        "descriptor": "Timothy Liebelt"
+      },
+      "annualBasePay": 59400.0,
+      "currency": "USD",
+      "nationalId": "EW545738"
+    },
+    {
+      "worker": {
+        "id": "3e00980eae441e21d25864f225d4a0fc",
+        "descriptor": "Gunbir Sethi"
+      },
+      "annualBasePay": 63700.0,
+      "currency": "USD",
+      "nationalId": "VP010512"
+    },
+    {
+      "worker": {
+        "id": "9c89d374c66495a780773e33690e7e62",
+        "descriptor": "Lynn Butcher"
+      },
+      "annualBasePay": 54100.0,
+      "currency": "GBP",
+      "nationalId": "VN622660"
+    },
+    {
+      "worker": {
+        "id": "8685abaa7a768555a987b218ff84faef",
+        "descriptor": "Barbara Ramachandran"
+      },
+      "annualBasePay": 1220200.0,
+      "currency": "INR",
+      "nationalId": "XU419182"
+    },
+    {
+      "worker": {
+        "id": "476cf68c3f1be0d0f514105831383975",
+        "descriptor": "Clare Baker"
+      },
+      "annualBasePay": 46600.0,
+      "currency": "USD",
+      "nationalId": "WW969691"
+    },
+    {
+      "worker": {
+        "id": "8f7c1d59594b2a3a7ad465a15129950d",
+        "descriptor": "Orinder Schmiedecke"
+      },
+      "annualBasePay": 67200.0,
+      "currency": "USD",
+      "nationalId": "XS513412"
+    },
+    {
+      "worker": {
+        "id": "257f7595cdfb4db9c5e78b23f4613f09",
+        "descriptor": "Denise Sahota"
+      },
+      "annualBasePay": 1332800.0,
+      "currency": "INR",
+      "nationalId": "KF627828"
+    },
+    {
+      "worker": {
+        "id": "89e03e22d3f4a49b33baba8836c7d6fa",
+        "descriptor": "Fridolin McLean"
+      },
+      "annualBasePay": 58800.0,
+      "currency": "USD",
+      "nationalId": "JG507236"
+    },
+    {
+      "worker": {
+        "id": "39c59df987f255d6e7ba26acab7a3d1c",
+        "descriptor": "Nilima Sagar"
+      },
+      "annualBasePay": 36700.0,
+      "currency": "EUR",
+      "nationalId": "RO190340"
+    },
+    {
+      "worker": {
+        "id": "e1721c83ef5e4376a723fb72682b163a",
+        "descriptor": "Gunnar Tandon"
+      },
+      "annualBasePay": 43000.0,
+      "currency": "GBP",
+      "nationalId": "IN485807"
+    },
+    {
+      "worker": {
+        "id": "a6fd0cb116e6e5c0c4cb294fe86e8e63",
+        "descriptor": "Harsh Jordan"
+      },
+      "annualBasePay": 52500.0,
+      "currency": "EUR",
+      "nationalId": "ZV517133"
+    },
+    {
+      "worker": {
+        "id": "ff46a6bf094d916deb6d2fedef158d5b",
+        "descriptor": "Natascha Gandhi"
+      },
+      "annualBasePay": 51700.0,
+      "currency": "GBP",
+      "nationalId": "IK095849"
+    },
+    {
+      "worker": {
+        "id": "1b780ede9a4ffc0c9165f2ed4c636e95",
+        "descriptor": "Hülya Hoffmann"
+      },
+      "annualBasePay": 46000.0,
+      "currency": "EUR",
+      "nationalId": "PJ260422"
+    }
+  ]
+}

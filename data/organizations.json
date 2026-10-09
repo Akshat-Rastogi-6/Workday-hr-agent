@@ -1,0 +1,80 @@
+{
+  "total": 6,
+  "data": [
+    {
+      "id": "17fc695a07a0ca6e0822e8f36c031199",
+      "descriptor": "Northwind Global (CEO)",
+      "type": "Supervisory",
+      "superior": null,
+      "manager": {
+        "id": "47229389571aa8766c307511b2b9437a",
+        "descriptor": "Angel Henschel"
+      }
+    },
+    {
+      "id": "9a1de644815ef6d13b8faa1837f8a88b",
+      "descriptor": "Engineering",
+      "type": "Supervisory",
+      "superior": {
+        "id": "17fc695a07a0ca6e0822e8f36c031199",
+        "descriptor": "Northwind Global (CEO)"
+      },
+      "manager": {
+        "id": "0b1f9163ce9ff57f43b7a3a69a8dca03",
+        "descriptor": "Leanne Hoffman"
+      }
+    },
+    {
+      "id": "b74d0fb132e706298fadc1a606cb0fb3",
+      "descriptor": "Sales",
+      "type": "Supervisory",
+      "superior": {
+        "id": "17fc695a07a0ca6e0822e8f36c031199",
+        "descriptor": "Northwind Global (CEO)"
+      },
+      "manager": {
+        "id": "688c7015aab97e494f2d479681d2c7de",
+        "descriptor": "Kirstin Mall"
+      }
+    },
+    {
+      "id": "6b65a6a48b8148f6b38a088ca65ed389",
+      "descriptor": "Finance",
+      "type": "Supervisory",
+      "superior": {
+        "id": "17fc695a07a0ca6e0822e8f36c031199",
+        "descriptor": "Northwind Global (CEO)"
+      },
+      "manager": {
+        "id": "0964fbbf8cd321b0c2b01cfdd045dd1c",
+        "descriptor": "Gavin Graham"
+      }
+    },
+    {
+      "id": "4737819096da1dac72ff5d2a386ecbe0",
+      "descriptor": "Human Resources",
+      "type": "Supervisory",
+      "superior": {
+        "id": "17fc695a07a0ca6e0822e8f36c031199",
+        "descriptor": "Northwind Global (CEO)"
+      },
+      "manager": {
+        "id": "5e187b248e676a01d86a646059a1120e",
+        "descriptor": "Othmar Bali"
+      }
+    },
+    {
+      "id": "c241330b01a9e71fde8a774bcf36d58b",
+      "descriptor": "Customer Support",
+      "type": "Supervisory",
+      "superior": {
+        "id": "17fc695a07a0ca6e0822e8f36c031199",
+        "descriptor": "Northwind Global (CEO)"
+      },
+      "manager": {
+        "id": "5d01f55f67fd64c4a334058aabd2b512",
+        "descriptor": "Hermine Rege"
+      }
+    }
+  ]
+}
