@@ -19,7 +19,7 @@ import sys
 
 from google import genai
 
-from tools import GET_DIRECT_REPORTS_SCHEMA, GET_WORKER_SCHEMA, run_tool
+from tools import GET_DIRECT_REPORTS_SCHEMA, GET_WORKER_SCHEMA, GET_TIME_OFF_BALANCE_SCHEMA, GET_SEARCH_WORKERS_SCHEMA, run_tool
 from dotenv import load_dotenv
 load_dotenv('.env')
 
@@ -31,13 +31,15 @@ MODEL = "gemini-3.5-flash-lite"  # or "gemini-3.5-turbo" for a larger model
 TOOL_DECLARATIONS = [
     {"type": "function", **GET_WORKER_SCHEMA},
     {"type": "function", **GET_DIRECT_REPORTS_SCHEMA},
+    {"type": "function", **GET_TIME_OFF_BALANCE_SCHEMA},
+    {"type": "function", **GET_SEARCH_WORKERS_SCHEMA},
 ] 
 
 question = sys.argv[1] if len(sys.argv) > 1 else "What does Carol Bahl do?"
 
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY")) #reads GEMINI_API_KEY from environment
 
-MAX_STEPS = 1
+MAX_STEPS = 6
 
 # Round 0: the question and tool descriptions go in.
 interaction = client.interactions.create(

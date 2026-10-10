@@ -15,12 +15,13 @@ import json
 from pathlib import Path
 
 WORKERS = json.loads(Path("data/workers.json").read_text())["data"]
+TIME_OFF_BALANCES = json.loads(Path("data/time_off_balances.json").read_text())["data"]
 
 
 #1. The Funtion -> A simple Python funtion with no AI involved.
 
 def get_worker(name: str) -> dict:
-    """Find a worker by full or partial name (case sensitive)."""
+    """Find a worker by full or partial name (case insensitive)."""
     matches = [w for w in WORKERS if name.lower() in w["descriptor"].lower()]
 
     if not matches:
@@ -45,7 +46,7 @@ def get_worker(name: str) -> dict:
 
 
 def get_direct_reports(manager_name: str) -> dict:
-    """ Find all the workers name and title who reports to a given manager by name (case sensitive)."""
+    """ Find all the workers name and title who reports to a given manager by name (case insensitive)."""
     manager = get_worker(manager_name)
     if "error" in manager:
         return manager  # pass the error along
@@ -62,6 +63,42 @@ def get_direct_reports(manager_name: str) -> dict:
         "manager": manager["name"],
         "count": len(reports),
         "reports": reports
+    }
+
+def get_time_off_balance(name: str) -> dict:
+    " Find the time off balance for a given employee by name (case insensitive)."
+    worker = get_worker(name)
+    if "error" in worker:
+        return worker
+
+    balance = {
+        row["timeOffPlan"]: row["balance"]
+        for row in TIME_OFF_BALANCES
+        if row["worker"]["descriptor"] == worker["name"]
+    }
+
+    return {
+        "name": worker["name"],
+        "unit": "Days",
+        "time_off_balance": balance
+    }
+
+def search_workers(department: str = "", location: str = "", title: str = "") -> dict:
+    """ Search for workers by department or location or title (case insensitive)."""
+
+    matches = [w for w in WORKERS if department!="" and department.lower() in w["primarySupervisoryOrganization"]["descriptor"].lower()
+                                    or location!="" and location.lower() in w["location"]["descriptor"].lower()
+                                    or title!="" and title.lower() in w["businessTitle"].lower()]
+
+    return {
+        "count": len(matches),
+        "workers": [
+            {
+                "name": w["descriptor"],
+                "title": w["businessTitle"]
+            }
+            for w in matches
+        ]
     }
 
 # 2. The Schema -> This text is ALL the model know about the funtion.
@@ -102,11 +139,57 @@ GET_DIRECT_REPORTS_SCHEMA = {
     },
 }
 
+GET_TIME_OFF_BALANCE_SCHEMA = {
+    "name": "get_time_off_balance",
+    "description": (
+        "Look up the time off balance for a given employee by name and return their balance for each time off plan. "
+        "Use this whenever the user asks about an employee's time off balance."
+    ),
+    "parameters": {
+        "type": "object",
+        "properties": {
+            "name": {
+                "type": "string",
+                "description": "Full or partial name of the employee, e.g. 'John Doe'.",
+            }
+        },
+        "required": ["name"],
+    },
+}
+
+GET_SEARCH_WORKERS_SCHEMA = {
+    "name": "search_workers",
+    "description": (
+        "Search for workers by department, location, or title and return their names and titles. "
+        "Use this whenever the user asks about employees in a specific department, location, or with a specific title."
+    ),
+    "parameters": {
+        "type": "object",
+        "properties": {
+            "department": {
+                "type": "string",
+                "description": "Full or partial name of the department, e.g. 'Engineering'.",
+            },
+            "location": {
+                "type": "string",
+                "description": "Full or partial name of the location, e.g. 'New York'.",
+            },
+            "title": {
+                "type": "string",
+                "description": "Full or partial job title, e.g. 'Software Engineer'.",
+            }
+        },
+        "required": [],
+    },
+}
+
 # 3. The dispatcher (Runner) -> Maps the name the model asks for to the real function.
 
 TOOLS = {
     "get_worker": get_worker, 
-    "get_direct_reports": get_direct_reports
+    "get_direct_reports": get_direct_reports,
+    "get_time_off_balance": get_time_off_balance,
+    "search_workers": search_workers,
     }
 
 def run_tool(name: str, agruments: dict) -> str:
