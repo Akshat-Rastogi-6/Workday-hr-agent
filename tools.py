@@ -86,25 +86,70 @@ def get_time_off_balance(name: str) -> dict:
 def search_workers(department: str = "", location: str = "", title: str = "") -> dict:
     """ Search for workers by department or location or title (case insensitive)."""
 
-    matches = [w for w in WORKERS if department!="" and department.lower() in w["primarySupervisoryOrganization"]["descriptor"].lower()
-                                    or location!="" and location.lower() in w["location"]["descriptor"].lower()
-                                    or title!="" and title.lower() in w["businessTitle"].lower()]
+    if not (department or location or title): return {"error": "Provide at least one of department, location or title."}
+
+    matches = [
+        w for w in WORKERS
+        if (not department or department.lower() in w["primarySupervisoryOrganization"]["descriptor"].lower())
+        and (not location or location.lower() in w["location"]["descriptor"].lower())
+        and (not title or title.lower() in w["businessTitle"].lower())
+    ]
+
+    CAP = 25
 
     return {
         "count": len(matches),
+        "returned": min(len(matches), CAP),
         "workers": [
             {
                 "name": w["descriptor"],
-                "title": w["businessTitle"]
+                "title": w["businessTitle"],
+                "department": w["primarySupervisoryOrganization"]["descriptor"],
+                "location": w["location"]["descriptor"],
             }
-            for w in matches
+            for w in matches[:CAP]
         ]
     }
+
+def get_team_time_off(manager_name: str, time_off_plan: str, threshold: float | None = None) -> dict:
+    manager = get_worker(manager_name)
+    if "error" in manager:
+        return manager
+
+    if time_off_plan not in ["Vacation", "Sick Leave", "Floating Holiday"]:
+        return {"error": f"Invalid time off plan '{time_off_plan}'. Must be one of Vacation, Sick Leave, Floating Holiday."}
+
+    team = {
+        w["descriptor"] for w in WORKERS
+        if w["manager"] and w["manager"]["descriptor"] == manager["name"]
+    }
+
+    rows = [
+        {"name": b["worker"]["descriptor"], "balance": b["balance"]}
+        for b in TIME_OFF_BALANCES
+        if b["worker"]["descriptor"] in team and b["timeOffPlan"] == time_off_plan
+    ]
+
+    if threshold is not None:
+        rows = [r for r in rows if r["balance"] < threshold]
+
+    rows.sort(key=lambda r: r["balance"])
+
+    return {
+        "manager": manager["name"],
+        "plan": time_off_plan,
+        "unit": "Days",
+        "threshold": threshold,
+        "team_size": len(team),
+        "matched": len(rows),
+        "workers": rows,
+    }
+    
 
 # 2. The Schema -> This text is ALL the model know about the funtion.
 GET_WORKER_SCHEMA = {
     "name": "get_worker",
-    "description": (
+    "description": (    
         "Look up one employee by name and return their job title, department, "
         "location, hire date and manager. Use this whenever the user asks "
         "about a specific person."
@@ -183,6 +228,33 @@ GET_SEARCH_WORKERS_SCHEMA = {
     },
 }
 
+GET_TEAM_TIME_OFF_SCHEMA = {
+    "name": "get_team_time_off",
+    "description": (
+        "Return the balance of one time-off plan for every direct report of a manager, sorted lowest first. Takes the manager's name directly; no need to look up the team first."
+        "Use for any question about a team's time off: who is low, who has the most, or the full list."
+    ),
+    "parameters": {
+        "type": "object",
+        "properties": {
+            "manager_name": {
+                "type": "string",
+                "description": "Full or partial name of the manager, e.g. 'Alice Smith'.",
+            },
+            "time_off_plan": {
+                "type": "string",
+                "enum": ["Vacation", "Sick Leave", "Floating Holiday"],
+                "description": "The time off plan to check, e.g. 'Vacation'.",
+            },
+            "threshold": {
+                "type": "number",
+                "description": "Optional. If given, return only people with a balance strictly below this many days. Omit to return the whole team.",
+            }
+        },
+        "required": ["manager_name", "time_off_plan"],
+    },
+}
+
 # 3. The dispatcher (Runner) -> Maps the name the model asks for to the real function.
 
 TOOLS = {
@@ -190,6 +262,7 @@ TOOLS = {
     "get_direct_reports": get_direct_reports,
     "get_time_off_balance": get_time_off_balance,
     "search_workers": search_workers,
+    "get_team_time_off": get_team_time_off,
     }
 
 def run_tool(name: str, agruments: dict) -> str:
@@ -199,9 +272,15 @@ def run_tool(name: str, agruments: dict) -> str:
 
 if __name__ == "__main__":
     # Pretend to be the model: these are the requests it would send back.
-    print(run_tool("get_worker", {"name": "Carol Bahl"}))
-    print(run_tool("get_worker", {"name": "an"}))
-    print(run_tool("get_worker", {"name": "Zzyzx"}))
-    
-    print(run_tool("get_direct_reports", {"manager_name": "Tom Davis"}))
-    print(run_tool("get_direct_reports", {"manager_name": "an"}))
+    # print(run_tool("search_workers", {"department": "Finance", "location": "London"}))  # 13, all Finance + London
+    # print(run_tool("search_workers", {"department": "Engineering"})[:300])              # total 40, returned 25
+    # print(run_tool("search_workers", {"title": "Accountant"})[:300])                    # only Accountants
+    # print(run_tool("search_workers", {}))                                               # error, not 200 people
+
+    # result = json.loads(run_tool("search_workers", {"department": "Engineering"}))
+    # print(result["count"], len(result["workers"]))
+
+    print(run_tool("get_team_time_off", {"manager_name": "Tom Davis", "time_off_plan": "Vacation", "threshold": 5}))
+    print(run_tool("get_team_time_off", {"manager_name": "Tom Davis", "time_off_plan": "Vacation"}))
+    print(run_tool("get_team_time_off", {"manager_name": "Carol Bahl", "time_off_plan": "Vacation"}))
+    print(run_tool("get_team_time_off", {"manager_name": "Zzyzx", "time_off_plan": "Vacation"}))

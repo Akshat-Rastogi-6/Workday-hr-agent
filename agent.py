@@ -19,7 +19,7 @@ import sys
 
 from google import genai
 
-from tools import GET_DIRECT_REPORTS_SCHEMA, GET_WORKER_SCHEMA, GET_TIME_OFF_BALANCE_SCHEMA, GET_SEARCH_WORKERS_SCHEMA, run_tool
+from tools import GET_DIRECT_REPORTS_SCHEMA, GET_WORKER_SCHEMA, GET_TIME_OFF_BALANCE_SCHEMA, GET_SEARCH_WORKERS_SCHEMA, GET_TEAM_TIME_OFF_SCHEMA, run_tool
 from dotenv import load_dotenv
 load_dotenv('.env')
 
@@ -33,6 +33,7 @@ TOOL_DECLARATIONS = [
     {"type": "function", **GET_DIRECT_REPORTS_SCHEMA},
     {"type": "function", **GET_TIME_OFF_BALANCE_SCHEMA},
     {"type": "function", **GET_SEARCH_WORKERS_SCHEMA},
+    {"type": "function", **GET_TEAM_TIME_OFF_SCHEMA},
 ] 
 
 question = sys.argv[1] if len(sys.argv) > 1 else "What does Carol Bahl do?"
