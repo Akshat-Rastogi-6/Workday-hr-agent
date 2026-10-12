@@ -149,5 +149,5 @@ for name, rows in [
     ("compensation", compensation),
 ]:
     path = OUT_DIR / f"{name}.json"
-    path.write_text(json.dumps({"total": len(rows), "data": rows}, indent=2, ensure_ascii=False))
+    path.write_text(json.dumps({"total": len(rows), "data": rows}, indent=2, ensure_ascii=False), encoding="utf-8")
     print(f"{path}: {len(rows)} records")
