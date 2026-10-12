@@ -18,6 +18,8 @@ People are identified in two ways:
 
 import json
 from pathlib import Path
+from typing import Annotated, Literal
+from pydantic import Field
 
 WORKERS = json.loads(Path("data/workers.json").read_text(encoding="utf-8"))["data"]
 TIME_OFF_BALANCES = json.loads(Path("data/time_off_balances.json").read_text(encoding="utf-8"))["data"]
@@ -61,8 +63,12 @@ def _worker_id_of(ref: dict | None) -> str | None:
     return WORKERS_BY_ID[ref["id"]]["workerId"]
 
 
-def get_worker(name: str) -> dict:
-    """Find a worker by full or partial name (case-insensitive) or by workerId."""
+def get_worker(
+        name: Annotated[str, Field(description="Full or partial name, or the workerId, of the employee, e.g. 'Carol Bahl' or '10011'.")]
+    ) -> dict:
+    """Look up one employee by name or workerId and return their job title, department,
+    location, hire date, and their manager's name and workerId. Use this whenever the user
+    asks about a specific person."""
     w = _find_worker(name)
     if "error" in w:
         return w
@@ -79,8 +85,11 @@ def get_worker(name: str) -> dict:
     }
 
 
-def get_direct_reports(manager_name: str) -> dict:
-    """List everyone who reports directly to a manager (name or workerId)."""
+def get_direct_reports(
+        manager_name: Annotated[str, Field(description="Full or partial name, or the workerId, of the manager, e.g. 'Tom Davis' or '10003'.")],
+    ) -> dict:
+    """List all direct reports of a manager, given the manager's name or workerId.
+    Returns each report's name, workerId and title. Use this whenever the user asks who is on a manager's team."""
     manager = _find_worker(manager_name)
     if "error" in manager:
         return manager  # pass the error along
@@ -102,8 +111,11 @@ def get_direct_reports(manager_name: str) -> dict:
     }
 
 
-def get_time_off_balance(name: str) -> dict:
-    """Time-off balance for every plan, for one worker (name or workerId)."""
+def get_time_off_balance(
+        name: Annotated[str, Field(description="Full or partial name, or the workerId, of the employee, e.g. 'Carol Bahl' or '10011'.")]
+    ) -> dict:
+    """Look up one employee's time off balance for every plan, given their name or workerId.
+    Use this whenever the user asks about a single person's time off."""
     worker = _find_worker(name)
     if "error" in worker:
         return worker
@@ -122,8 +134,14 @@ def get_time_off_balance(name: str) -> dict:
     }
 
 
-def search_workers(department: str = "", location: str = "", title: str = "") -> dict:
-    """Search for workers by department AND location AND title (each optional, case-insensitive)."""
+def search_workers(
+    department: Annotated[str, Field(description="The department to search in, e.g. 'Engineering'.")] = "",
+    location: Annotated[str, Field(description="The location to search in, e.g. 'London'.")] = "",
+    title: Annotated[str, Field(description="The job title to search for, e.g. 'Software Engineer'.")] = ""
+) -> dict:
+    """Search for workers by department, location and/or job title. Every filter you give must match.
+    Returns name, workerId, title, department and location, at most 25 rows; 'count' is the full total.
+    Use this whenever the user asks about employees in a department, location, or with a job title."""
     if not (department or location or title):
         return {"error": "Provide at least one of department, location or title."}
 
@@ -150,8 +168,14 @@ def search_workers(department: str = "", location: str = "", title: str = "") ->
     }
 
 
-def get_team_time_off(manager_name: str, time_off_plan: str, threshold: float | None = None) -> dict:
-    """One plan's balance for every direct report of a manager, sorted lowest first."""
+def get_team_time_off(
+    manager_name: Annotated[str, Field(description="Full or partial name, or the workerId, of the manager, e.g. 'Tom Davis' or '10003'.")],
+    time_off_plan: Annotated[Literal["Vacation", "Sick Leave", "Floating Holiday"], Field(description="Which time-off plan to report on.")],
+    threshold: Annotated[float | None, Field(description="Optional. If given, return only people with a balance strictly below this many days. Omit to return the whole team.")] = None,
+) -> dict:
+    """Return the balance of one time-off plan for every direct report of a manager, sorted lowest first,
+    with each person's workerId. Takes the manager's name or workerId directly; no need to look up the
+    team first. Use for any question about a team's time off: who is low, who has the most, or the full list."""
     manager = _find_worker(manager_name)
     if "error" in manager:
         return manager
@@ -325,31 +349,31 @@ def run_tool(name: str, arguments: dict) -> str:
 if __name__ == "__main__":
     # Pretend to be the model: these are the requests it would send back.
 
-    print("--- get_worker ---")
+    # print("--- get_worker ---")
     print(run_tool("get_worker", {"name": "Carol Bahl"}))
-    print(run_tool("get_worker", {"name": "10011"}))               # by ID
-    print(run_tool("get_worker", {"name": 10011}))                 # ID sent as a number
-    print(run_tool("get_worker", {"name": "an"})[:300])            # ambiguous: candidates with IDs
-    print(run_tool("get_worker", {"name": "Zzyzx"}))               # not found
+    # print(run_tool("get_worker", {"name": "10011"}))               # by ID
+    # print(run_tool("get_worker", {"name": 10011}))                 # ID sent as a number
+    # print(run_tool("get_worker", {"name": "an"})[:300])            # ambiguous: candidates with IDs
+    # print(run_tool("get_worker", {"name": "Zzyzx"}))               # not found
 
-    print("--- get_direct_reports ---")
-    print(run_tool("get_direct_reports", {"manager_name": "Tom Davis"})[:300])
-    print(run_tool("get_direct_reports", {"manager_name": "10003"})[:300])   # by ID
-    print(run_tool("get_direct_reports", {"manager_name": "Carol Bahl"}))    # no reports
+    # print("--- get_direct_reports ---")
+    # print(run_tool("get_direct_reports", {"manager_name": "Tom Davis"})[:300])
+    # print(run_tool("get_direct_reports", {"manager_name": "10003"})[:300])   # by ID
+    # print(run_tool("get_direct_reports", {"manager_name": "Carol Bahl"}))    # no reports
 
-    print("--- get_time_off_balance ---")
-    print(run_tool("get_time_off_balance", {"name": "Carol Bahl"}))
-    print(run_tool("get_time_off_balance", {"name": "10011"}))
+    # print("--- get_time_off_balance ---")
+    # print(run_tool("get_time_off_balance", {"name": "Carol Bahl"}))
+    # print(run_tool("get_time_off_balance", {"name": "10011"}))
 
-    print("--- search_workers ---")
-    print(run_tool("search_workers", {"department": "Finance", "location": "London"})[:300])
-    r = json.loads(run_tool("search_workers", {"department": "Engineering"}))
-    print("count", r["count"], "returned", r["returned"], "rows", len(r["workers"]))
-    print(run_tool("search_workers", {}))
+    # print("--- search_workers ---")
+    # print(run_tool("search_workers", {"department": "Finance", "location": "London"})[:300])
+    # r = json.loads(run_tool("search_workers", {"department": "Engineering"}))
+    # print("count", r["count"], "returned", r["returned"], "rows", len(r["workers"]))
+    # print(run_tool("search_workers", {}))
 
-    print("--- get_team_time_off ---")
-    print(run_tool("get_team_time_off", {"manager_name": "Tom Davis", "time_off_plan": "Vacation", "threshold": 5}))
-    print(run_tool("get_team_time_off", {"manager_name": "Tom Davis", "time_off_plan": "Vacation"})[:300])
-    print(run_tool("get_team_time_off", {"manager_name": "Carol Bahl", "time_off_plan": "Vacation"}))
-    print(run_tool("get_team_time_off", {"manager_name": "Tom Davis", "time_off_plan": "Vacations"}))
-    print(run_tool("get_team_time_off", {"manager_name": "Zzyzx", "time_off_plan": "Vacation"}))
+    # print("--- get_team_time_off ---")
+    # print(run_tool("get_team_time_off", {"manager_name": "Tom Davis", "time_off_plan": "Vacation", "threshold": 5}))
+    print(run_tool("get_team_time_off", {"manager_name": "Tom Davis", "time_off_plan": "Vacation"}))
+    # print(run_tool("get_team_time_off", {"manager_name": "Carol Bahl", "time_off_plan": "Vacation"}))
+    # print(run_tool("get_team_time_off", {"manager_name": "Tom Davis", "time_off_plan": "Vacations"}))
+    # print(run_tool("get_team_time_off", {"manager_name": "Zzyzx", "time_off_plan": "Vacation"}))
