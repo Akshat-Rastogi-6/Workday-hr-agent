@@ -215,135 +215,137 @@ def get_team_time_off(
         "workers": rows,
     }
 
+# No Longer needed as the MCP server handles this now. The model never runs this code. It only reads the schema and replies with "please call get_worker with these arguments". Your program does the calling.
+
 
 # 2. The schemas -> this text is ALL the model knows about each function.
 
-GET_WORKER_SCHEMA = {
-    "name": "get_worker",
-    "description": (
-        "Look up one employee by name or workerId and return their job title, department, "
-        "location, hire date, and their manager's name and workerId. Use this whenever the user "
-        "asks about a specific person."
-    ),
-    "parameters": {
-        "type": "object",
-        "properties": {
-            "name": {
-                "type": "string",
-                "description": "Full or partial name, or the workerId, of the employee, e.g. 'Carol Bahl' or '10011'.",
-            }
-        },
-        "required": ["name"],
-    },
-}
+# GET_WORKER_SCHEMA = {
+#     "name": "get_worker",
+#     "description": (
+#         "Look up one employee by name or workerId and return their job title, department, "
+#         "location, hire date, and their manager's name and workerId. Use this whenever the user "
+#         "asks about a specific person."
+#     ),
+#     "parameters": {
+#         "type": "object",
+#         "properties": {
+#             "name": {
+#                 "type": "string",
+#                 "description": "Full or partial name, or the workerId, of the employee, e.g. 'Carol Bahl' or '10011'.",
+#             }
+#         },
+#         "required": ["name"],
+#     },
+# }
 
-GET_DIRECT_REPORTS_SCHEMA = {
-    "name": "get_direct_reports",
-    "description": (
-        "List all direct reports of a manager, given the manager's name or workerId. "
-        "Returns each report's name, workerId and title. Use this whenever the user asks who is on a manager's team."
-    ),
-    "parameters": {
-        "type": "object",
-        "properties": {
-            "manager_name": {
-                "type": "string",
-                "description": "Full or partial name, or the workerId, of the manager, e.g. 'Tom Davis' or '10003'.",
-            }
-        },
-        "required": ["manager_name"],
-    },
-}
+# GET_DIRECT_REPORTS_SCHEMA = {
+#     "name": "get_direct_reports",
+#     "description": (
+#         "List all direct reports of a manager, given the manager's name or workerId. "
+#         "Returns each report's name, workerId and title. Use this whenever the user asks who is on a manager's team."
+#     ),
+#     "parameters": {
+#         "type": "object",
+#         "properties": {
+#             "manager_name": {
+#                 "type": "string",
+#                 "description": "Full or partial name, or the workerId, of the manager, e.g. 'Tom Davis' or '10003'.",
+#             }
+#         },
+#         "required": ["manager_name"],
+#     },
+# }
 
-GET_TIME_OFF_BALANCE_SCHEMA = {
-    "name": "get_time_off_balance",
-    "description": (
-        "Look up one employee's time off balance for every plan, given their name or workerId. "
-        "Use this whenever the user asks about a single person's time off."
-    ),
-    "parameters": {
-        "type": "object",
-        "properties": {
-            "name": {
-                "type": "string",
-                "description": "Full or partial name, or the workerId, of the employee, e.g. 'Carol Bahl' or '10011'.",
-            }
-        },
-        "required": ["name"],
-    },
-}
+# GET_TIME_OFF_BALANCE_SCHEMA = {
+#     "name": "get_time_off_balance",
+#     "description": (
+#         "Look up one employee's time off balance for every plan, given their name or workerId. "
+#         "Use this whenever the user asks about a single person's time off."
+#     ),
+#     "parameters": {
+#         "type": "object",
+#         "properties": {
+#             "name": {
+#                 "type": "string",
+#                 "description": "Full or partial name, or the workerId, of the employee, e.g. 'Carol Bahl' or '10011'.",
+#             }
+#         },
+#         "required": ["name"],
+#     },
+# }
 
-GET_SEARCH_WORKERS_SCHEMA = {
-    "name": "search_workers",
-    "description": (
-        "Search for workers by department, location and/or job title. Every filter you give must match. "
-        "Returns name, workerId, title, department and location, at most 25 rows; 'count' is the full total. "
-        "Use this whenever the user asks about employees in a department, location, or with a job title."
-    ),
-    "parameters": {
-        "type": "object",
-        "properties": {
-            "department": {
-                "type": "string",
-                "description": "Full or partial department name, e.g. 'Engineering'.",
-            },
-            "location": {
-                "type": "string",
-                "description": "Full or partial location name, e.g. 'London'.",
-            },
-            "title": {
-                "type": "string",
-                "description": "Full or partial job title, e.g. 'Software Engineer'.",
-            },
-        },
-        "required": [],
-    },
-}
+# GET_SEARCH_WORKERS_SCHEMA = {
+#     "name": "search_workers",
+#     "description": (
+#         "Search for workers by department, location and/or job title. Every filter you give must match. "
+#         "Returns name, workerId, title, department and location, at most 25 rows; 'count' is the full total. "
+#         "Use this whenever the user asks about employees in a department, location, or with a job title."
+#     ),
+#     "parameters": {
+#         "type": "object",
+#         "properties": {
+#             "department": {
+#                 "type": "string",
+#                 "description": "Full or partial department name, e.g. 'Engineering'.",
+#             },
+#             "location": {
+#                 "type": "string",
+#                 "description": "Full or partial location name, e.g. 'London'.",
+#             },
+#             "title": {
+#                 "type": "string",
+#                 "description": "Full or partial job title, e.g. 'Software Engineer'.",
+#             },
+#         },
+#         "required": [],
+#     },
+# }
 
-GET_TEAM_TIME_OFF_SCHEMA = {
-    "name": "get_team_time_off",
-    "description": (
-        "Return the balance of one time-off plan for every direct report of a manager, sorted lowest first, "
-        "with each person's workerId. Takes the manager's name or workerId directly; no need to look up the team first. "
-        "Use for any question about a team's time off: who is low, who has the most, or the full list."
-    ),
-    "parameters": {
-        "type": "object",
-        "properties": {
-            "manager_name": {
-                "type": "string",
-                "description": "Full or partial name, or the workerId, of the manager, e.g. 'Tom Davis' or '10003'.",
-            },
-            "time_off_plan": {
-                "type": "string",
-                "enum": TIME_OFF_PLANS,
-                "description": "Which time-off plan to report on.",
-            },
-            "threshold": {
-                "type": "number",
-                "description": "Optional. If given, return only people with a balance strictly below this many days. Omit to return the whole team.",
-            },
-        },
-        "required": ["manager_name", "time_off_plan"],
-    },
-}
+# GET_TEAM_TIME_OFF_SCHEMA = {
+#     "name": "get_team_time_off",
+#     "description": (
+#         "Return the balance of one time-off plan for every direct report of a manager, sorted lowest first, "
+#         "with each person's workerId. Takes the manager's name or workerId directly; no need to look up the team first. "
+#         "Use for any question about a team's time off: who is low, who has the most, or the full list."
+#     ),
+#     "parameters": {
+#         "type": "object",
+#         "properties": {
+#             "manager_name": {
+#                 "type": "string",
+#                 "description": "Full or partial name, or the workerId, of the manager, e.g. 'Tom Davis' or '10003'.",
+#             },
+#             "time_off_plan": {
+#                 "type": "string",
+#                 "enum": TIME_OFF_PLANS,
+#                 "description": "Which time-off plan to report on.",
+#             },
+#             "threshold": {
+#                 "type": "number",
+#                 "description": "Optional. If given, return only people with a balance strictly below this many days. Omit to return the whole team.",
+#             },
+#         },
+#         "required": ["manager_name", "time_off_plan"],
+#     },
+# }
 
 
 # 3. The dispatcher -> maps the name the model asks for to the real function.
 
-TOOLS = {
-    "get_worker": get_worker,
-    "get_direct_reports": get_direct_reports,
-    "get_time_off_balance": get_time_off_balance,
-    "search_workers": search_workers,
-    "get_team_time_off": get_team_time_off,
-}
+# TOOLS = {
+#     "get_worker": get_worker,
+#     "get_direct_reports": get_direct_reports,
+#     "get_time_off_balance": get_time_off_balance,
+#     "search_workers": search_workers,
+#     "get_team_time_off": get_team_time_off,
+# }
 
 
-def run_tool(name: str, arguments: dict) -> str:
-    if name not in TOOLS:
-        return json.dumps({"error": f"Unknown tool '{name}'."})
-    return json.dumps(TOOLS[name](**arguments), ensure_ascii=False)
+# def run_tool(name: str, arguments: dict) -> str:
+#     if name not in TOOLS:
+#         return json.dumps({"error": f"Unknown tool '{name}'."})
+#     return json.dumps(TOOLS[name](**arguments), ensure_ascii=False)
 
 
 if __name__ == "__main__":
