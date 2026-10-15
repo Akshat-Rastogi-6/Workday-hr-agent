@@ -16,11 +16,14 @@ Run:  python lesson2.py "What does Carol Bahl do?"
 
 import os
 import sys
+import asyncio
+import json
 
 from google import genai
-
-from tools import GET_DIRECT_REPORTS_SCHEMA, GET_WORKER_SCHEMA, GET_TIME_OFF_BALANCE_SCHEMA, GET_SEARCH_WORKERS_SCHEMA, GET_TEAM_TIME_OFF_SCHEMA, run_tool
 from dotenv import load_dotenv
+from pathlib import Path
+
+from mcp import Client, StdioServerParameters
 load_dotenv('.env')
 
 MODEL = "gemini-3.5-flash-lite"  # or "gemini-3.5-turbo" for a larger model
@@ -28,13 +31,6 @@ MODEL = "gemini-3.5-flash-lite"  # or "gemini-3.5-turbo" for a larger model
 # Gemini wants each declaration marked with "type": "function".
 # The rest of the schema is what we wrote in tools.py
 
-TOOL_DECLARATIONS = [
-    {"type": "function", **GET_WORKER_SCHEMA},
-    {"type": "function", **GET_DIRECT_REPORTS_SCHEMA},
-    {"type": "function", **GET_TIME_OFF_BALANCE_SCHEMA},
-    {"type": "function", **GET_SEARCH_WORKERS_SCHEMA},
-    {"type": "function", **GET_TEAM_TIME_OFF_SCHEMA},
-] 
 
 SYSTEM_INSTRUCTION = """You answer questions about employees using the HR tools provided.
 Rules:
@@ -45,13 +41,54 @@ Rules:
 5. If no tool covers the question (for example salary), say you don't have access to that data and mention what you can look up.
 6. Always include units with numbers, for example "7.0 days"."""
 
-question = sys.argv[1] if len(sys.argv) > 1 else "What does Carol Bahl do?"
+# question = sys.argv[1] if len(sys.argv) > 1 else "What does Carol Bahl do?"
 
+HERE = Path(__file__).parent
+SERVER = StdioServerParameters(
+    command=sys.executable,              # the same Python as the agent, so your venv is used
+    args=[str(HERE / "server.py")],
+    cwd=str(HERE),                       # so tools.py finds data/
+)
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY")) #reads GEMINI_API_KEY from environment
 
 MAX_STEPS = 6
 
-def run_turn(question: str, previous_interaction_id: str | None = None):
+def clean_schema(schema):
+    """Reduce an MCP (JSON Schema) definition to the plain subset Gemini accepted from our hand-written schemas."""
+    if isinstance(schema, list):
+        return [clean_schema(s) for s in schema]
+    if not isinstance(schema, dict):
+        return schema
+    if "anyOf" in schema:                       # Optional[X] arrives as anyOf [X, null]
+        options = [o for o in schema["anyOf"] if o.get("type") != "null"]
+        if len(options) == 1:
+            rest = {k: v for k, v in schema.items() if k != "anyOf"}
+            schema = {**options[0], **rest}
+    out = {}
+    for key, value in schema.items():
+        if key in ("title", "default"):
+            continue
+        if key == "properties":                 # keys here are parameter NAMES, never strip them
+            out[key] = {name: clean_schema(prop) for name, prop in value.items()}
+        else:
+            out[key] = clean_schema(value)
+    return out
+
+
+def to_gemini(tool) -> dict:
+    return {
+        "type": "function",
+        "name": tool.name,
+        "description": tool.description,
+        "parameters": clean_schema(tool.input_schema),
+    }
+
+async def call_mcp_tool(mcp_client, name: str, arguments: dict) -> str:
+    result = await mcp_client.call_tool(name, arguments)
+    text = "\n".join(c.text for c in result.content if c.type == "text")
+    return json.dumps({"error": text}) if result.is_error else text
+
+async def run_turn(mcp_client, tool_declarations, question: str, previous_interaction_id: str | None = None):
     """"Handle one user message: call tools until the model answers or MAX_STEPS is reached. Returns the interaction ID to continue from, or None to start fresh."""
     kwargs = {}
     if previous_interaction_id:
@@ -60,7 +97,7 @@ def run_turn(question: str, previous_interaction_id: str | None = None):
     interaction = client.interactions.create(
         model=MODEL,
         input=question,
-        tools=TOOL_DECLARATIONS,
+        tools=tool_declarations,
         system_instruction=SYSTEM_INSTRUCTION,
         **kwargs,
     )
@@ -74,7 +111,7 @@ def run_turn(question: str, previous_interaction_id: str | None = None):
 
         results = []
         for call in calls:
-            result = run_tool(call.name, call.arguments)
+            result = await call_mcp_tool(mcp_client, call.name, call.arguments)
             print(f"[{step + 1}] {call.name}({call.arguments}) -> {result[:150]}")
             results.append(
                 {
@@ -88,7 +125,7 @@ def run_turn(question: str, previous_interaction_id: str | None = None):
         interaction = client.interactions.create(
             model=MODEL,
             input=results,
-            tools=TOOL_DECLARATIONS,
+            tools=tool_declarations,
             previous_interaction_id=interaction.id,
             system_instruction=SYSTEM_INSTRUCTION,
         )
@@ -100,9 +137,19 @@ def run_turn(question: str, previous_interaction_id: str | None = None):
     print("ANSWER:", interaction.output_text)
     return interaction.id
 
-previous_id = None
-while True:
-    question = input("You: ")
-    if question.strip().lower() in ("exit", "quit"):
-        break
-    previous_id = run_turn(question, previous_id)
+async def main():
+    async with Client(SERVER) as mcp_client:
+        tools = (await mcp_client.list_tools()).tools
+        tool_declarations = [to_gemini(t) for t in tools]
+        print("Loaded tools:", [t.name for t in tools])
+
+        previous_id = None
+        while True:
+            question = input("You: ")
+            if question.strip().lower() in ("exit", "quit"):
+                break
+            previous_id = await run_turn(mcp_client, tool_declarations, question, previous_id)
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
