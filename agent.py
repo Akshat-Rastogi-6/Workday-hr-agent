@@ -1,17 +1,30 @@
 """
-Lesson 2: a real model asks for your tool.
- 
-One question, two round trips, no loop yet:
-  1. send the question + tool descriptions
-  2. the model replies with a function call (a request, not an answer)
-  3. YOUR code runs the function
-  4. send the result back; the model writes the final answer
- 
-Setup:
-  pip install -U google-genai
-  set GEMINI_API_KEY in your environment (key from Google AI Studio)
- 
-Run:  python lesson2.py "What does Carol Bahl do?"
+Employee HR Agent
+=================
+
+Short description:
+    Uses Gemini and MCP-provided HR tools to answer questions about employees.
+
+Process:
+    1. Connect to the MCP server and load its available tools.
+    2. Send the user's question and tool definitions to Gemini.
+    3. Execute any tools requested by Gemini through the MCP client.
+    4. Return each tool result to Gemini until it produces an answer or the
+       maximum number of steps is reached.
+    5. Preserve the interaction ID so follow-up questions can continue the
+       conversation.
+
+Functions:
+    clean_schema:
+        Simplifies MCP JSON schemas for Gemini compatibility.
+    to_gemini:
+        Converts an MCP tool definition into a Gemini function declaration.
+    call_mcp_tool:
+        Calls an MCP tool and formats its result as text or an error payload.
+    run_turn:
+        Processes one user question, including Gemini responses and tool calls.
+    main:
+        Starts the MCP connection and runs the interactive question loop.
 """
 
 import os
@@ -88,8 +101,15 @@ async def call_mcp_tool(mcp_client, name: str, arguments: dict) -> str:
     text = "\n".join(c.text for c in result.content if c.type == "text")
     return json.dumps({"error": text}) if result.is_error else text
 
-async def run_turn(mcp_client, tool_declarations, question: str, previous_interaction_id: str | None = None):
-    """"Handle one user message: call tools until the model answers or MAX_STEPS is reached. Returns the interaction ID to continue from, or None to start fresh."""
+async def run_turn(mcp_client, tool_declarations, question: str, previous_interaction_id: str | None = None, verbose: bool = True):
+    """
+    Run a single turn of the conversation.
+    Returns a dict with:
+        answer: the final text answer, or None if the model stopped without answering
+        calls: a list of all the function calls made during this turn
+        stopped: True if the model stopped without answering, False otherwise
+        interaction_id: the ID of the interaction for continuing the conversation
+    """
     kwargs = {}
     if previous_interaction_id:
         kwargs["previous_interaction_id"] = previous_interaction_id
@@ -101,9 +121,9 @@ async def run_turn(mcp_client, tool_declarations, question: str, previous_intera
         system_instruction=SYSTEM_INSTRUCTION,
         **kwargs,
     )
-
+    all_calls = []
     for step in range(MAX_STEPS):
-        print("STEP TYPES RETURNED:", [s.type for s in interaction.steps])
+        if verbose: print("STEP TYPES RETURNED:", [s.type for s in interaction.steps])
 
         calls = [s for s in interaction.steps if s.type == "function_call"]
         if not calls:
@@ -112,7 +132,8 @@ async def run_turn(mcp_client, tool_declarations, question: str, previous_intera
         results = []
         for call in calls:
             result = await call_mcp_tool(mcp_client, call.name, call.arguments)
-            print(f"[{step + 1}] {call.name}({call.arguments}) -> {result[:150]}")
+            if verbose: print(f"[{step + 1}] {call.name}({call.arguments}) -> {result[:150]}")
+            all_calls.append({"name": call.name, "arguments": call.arguments})
             results.append(
                 {
                     "type": "function_result",
@@ -130,12 +151,15 @@ async def run_turn(mcp_client, tool_declarations, question: str, previous_intera
             system_instruction=SYSTEM_INSTRUCTION,
         )
 
-    pending = [s for s in interaction.steps if s.type == "function_call"]
-    if pending:
-        print(f"STOPPED: still asking for tools after {MAX_STEPS} rounds. Starting a fresh conversation.")
-        return None
-    print("ANSWER:", interaction.output_text)
-    return interaction.id
+    stopped = any(s.type == "function_call" for s in interaction.steps)
+    if verbose:
+        print("STOPPED..." if stopped else f"ANSWER: {interaction.output_text}")
+    return {
+        "answer": None if stopped else interaction.output_text,
+        "calls": all_calls,
+        "stopped": stopped,
+        "interaction_id": interaction.id,
+    }
 
 async def main():
     async with Client(SERVER) as mcp_client:
@@ -148,7 +172,9 @@ async def main():
             question = input("You: ")
             if question.strip().lower() in ("exit", "quit"):
                 break
-            previous_id = await run_turn(mcp_client, tool_declarations, question, previous_id)
+            result = await run_turn(mcp_client, tool_declarations, question, previous_id)
+            previous_id = None if result["stopped"] else result["interaction_id"]
+            # print("calls made:", result["calls"])
 
 
 if __name__ == "__main__":
