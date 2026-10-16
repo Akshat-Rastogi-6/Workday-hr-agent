@@ -152,6 +152,11 @@ def search_workers(
         and (not title or title.lower() in w["businessTitle"].lower())
     ]
 
+    if not matches:
+        titles = sorted({w["businessTitle"] for w in WORKERS})
+        return {"count": 0, "returned": 0, "workers": [],
+                "hint": "No matches. Job titles in use: " + ", ".join(titles)}
+
     return {
         "count": len(matches),
         "returned": min(len(matches), SEARCH_CAP),
@@ -172,6 +177,7 @@ def get_team_time_off(
     manager_name: Annotated[str, Field(description="Full or partial name, or the workerId, of the manager, e.g. 'Tom Davis' or '10003'.")],
     time_off_plan: Annotated[Literal["Vacation", "Sick Leave", "Floating Holiday"], Field(description="Which time-off plan to report on.")],
     threshold: Annotated[float | None, Field(description="Optional. If given, return only people with a balance strictly below this many days. Omit to return the whole team.")] = None,
+    inclusive: Annotated[bool, Field(description="Optional. If true, return people with a balance equal to or below the threshold. Default is false (strictly below).")] = False
 ) -> dict:
     """Return the balance of one time-off plan for every direct report of a manager, sorted lowest first,
     with each person's workerId. Takes the manager's name or workerId directly; no need to look up the
@@ -200,7 +206,10 @@ def get_team_time_off(
     ]
 
     if threshold is not None:
-        rows = [r for r in rows if r["balance"] < threshold]
+        if inclusive:
+            rows = [r for r in rows if r["balance"] <= threshold]
+        else:
+            rows = [r for r in rows if r["balance"] < threshold]
 
     rows.sort(key=lambda r: r["balance"])
 
@@ -213,6 +222,7 @@ def get_team_time_off(
         "team_size": len(team),
         "matched": len(rows),
         "workers": rows,
+        "inclusive": inclusive,
     }
 
 # No Longer needed as the MCP server handles this now. The model never runs this code. It only reads the schema and replies with "please call get_worker with these arguments". Your program does the calling.

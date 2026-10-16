@@ -52,7 +52,8 @@ Rules:
 3. If a lookup returns several candidates, list them and ask the user which one they mean.
 4. If a lookup finds no one, say that no matching employee was found. Do not try unrelated searches.
 5. If no tool covers the question (for example salary), say you don't have access to that data and mention what you can look up.
-6. Always include units with numbers, for example "7.0 days"."""
+6. Always include units with numbers, for example "7.0 days".
+7. If a lookup finds no one, say which name was not found. Do not try unrelated searches. """
 
 # question = sys.argv[1] if len(sys.argv) > 1 else "What does Carol Bahl do?"
 
