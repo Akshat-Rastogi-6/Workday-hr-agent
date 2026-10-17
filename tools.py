@@ -1,37 +1,27 @@
 """
-Tools the LLM can ask for.
 
-A "tool" is three things basically:
+Employee directory and HR information tools.
 
-1. A normal python function         -> get_worker()
-2. a description the model can read -> GET_WORKER_SCHEMA
-3. a way to run it by name          -> run_tool()
+Provides permission-aware lookups for worker profiles, direct reports,
+time-off balances, team time off, employee searches, and compensation.
 
-The model never runs this code. It only reads the schema and replies with
-"please call get_worker with these arguments". Your program does the calling.
-
-People are identified in two ways:
-- workerId (e.g. "10011"): short, shown to the model, accepted by every tool.
-- id (32-char hex): internal key used by the data files. Tools join on this,
-  never on names, because names can be duplicated or mangled.
 """
 
-import json
-from pathlib import Path
 from typing import Annotated, Literal
 from pydantic import Field
 
-WORKERS = json.loads(Path("data/workers.json").read_text(encoding="utf-8"))["data"]
-TIME_OFF_BALANCES = json.loads(Path("data/time_off_balances.json").read_text(encoding="utf-8"))["data"]
-
-# Lookup table: internal id -> full worker record. Built once at startup.
-WORKERS_BY_ID = {w["id"]: w for w in WORKERS}
+from data import WORKERS, WORKERS_BY_ID, TIME_OFF_BALANCES, COMPENSATION
+from permissions import can_view, current_user
 
 TIME_OFF_PLANS = ["Vacation", "Sick Leave", "Floating Holiday"]
 SEARCH_CAP = 25
 
 
 # 1. The functions -> plain Python, no AI involved.
+
+def _deny(what: str) -> dict:
+    return {"error": "permission_denied",
+            "message": f"You don't have access to {what}."}
 
 def _find_worker(query) -> dict:
     """Internal helper (not a tool). Return the raw worker record, or an {"error": ...} dict.
@@ -62,6 +52,20 @@ def _worker_id_of(ref: dict | None) -> str | None:
         return None
     return WORKERS_BY_ID[ref["id"]]["workerId"]
 
+def who_am_i() -> dict:
+    """Return the signed-in user's name, workerId, job title and manager's workerId.
+    Call this first whenever the user says I, me, my or mine."""
+    viewer = current_user()
+    if viewer is None:
+        return _deny("employee information (no signed-in user)")
+    
+    return {
+        "name": viewer["descriptor"],
+        "workerId": viewer["workerId"],
+        "title": viewer["businessTitle"],
+        "managerId": _worker_id_of(viewer["manager"]),
+    }
+
 
 def get_worker(
         name: Annotated[str, Field(description="Full or partial name, or the workerId, of the employee, e.g. 'Carol Bahl' or '10011'.")]
@@ -69,11 +73,18 @@ def get_worker(
     """Look up one employee by name or workerId and return their job title, department,
     location, hire date, and their manager's name and workerId. Use this whenever the user
     asks about a specific person."""
-    w = _find_worker(name)
+    viewer = current_user()
+    if viewer is None:
+        return _deny("employee information (no signed-in user)")
+
+    w = _find_worker(name)                         # 1. find the target
     if "error" in w:
         return w
 
-    return {
+    if not can_view(viewer, w, "directory"):       # 2. check the TARGET
+        return _deny(f"{w['descriptor']}'s profile")
+
+    return {                                       # 3. only now build the response
         "name": w["descriptor"],
         "workerId": w["workerId"],
         "title": w["businessTitle"],
@@ -90,9 +101,17 @@ def get_direct_reports(
     ) -> dict:
     """List all direct reports of a manager, given the manager's name or workerId.
     Returns each report's name, workerId and title. Use this whenever the user asks who is on a manager's team."""
+
+    viewer = current_user()
+    if viewer is None:
+        return _deny("employee information (no signed-in user)")
+
     manager = _find_worker(manager_name)
     if "error" in manager:
         return manager  # pass the error along
+
+    if not can_view(viewer, manager, "directory"):      
+        return _deny(f"{manager['descriptor']}'s profile")
 
     reports = [
         {
@@ -116,9 +135,17 @@ def get_time_off_balance(
     ) -> dict:
     """Look up one employee's time off balance for every plan, given their name or workerId.
     Use this whenever the user asks about a single person's time off."""
+
+    viewer = current_user()
+    if viewer is None:
+        return _deny("employee information (no signed-in user)")
+
     worker = _find_worker(name)
     if "error" in worker:
-        return worker
+        return worker  # pass the error along
+
+    if not can_view(viewer, worker, "time_off"):      
+        return _deny(f"{worker['descriptor']}'s time off")
 
     balance = {
         row["timeOffPlan"]: row["balance"]
@@ -142,6 +169,11 @@ def search_workers(
     """Search for workers by department, location and/or job title. Every filter you give must match.
     Returns name, workerId, title, department and location, at most 25 rows; 'count' is the full total.
     Use this whenever the user asks about employees in a department, location, or with a job title."""
+
+    viewer = current_user()
+    if viewer is None:
+        return _deny("employee information (no signed-in user)")
+
     if not (department or location or title):
         return {"error": "Provide at least one of department, location or title."}
 
@@ -182,6 +214,11 @@ def get_team_time_off(
     """Return the balance of one time-off plan for every direct report of a manager, sorted lowest first,
     with each person's workerId. Takes the manager's name or workerId directly; no need to look up the
     team first. Use for any question about a team's time off: who is low, who has the most, or the full list."""
+
+    viewer = current_user()
+    if viewer is None:
+        return _deny("employee information (no signed-in user)")
+
     manager = _find_worker(manager_name)
     if "error" in manager:
         return manager
@@ -190,10 +227,10 @@ def get_team_time_off(
         return {"error": f"Invalid time off plan '{time_off_plan}'. Must be one of: {', '.join(TIME_OFF_PLANS)}."}
 
     # Internal ids of the manager's direct reports.
-    team = {
-        w["id"] for w in WORKERS
-        if w["manager"] and w["manager"]["id"] == manager["id"]
-    }
+    team = [w for w in WORKERS if w["manager"] and w["manager"]["id"] == manager["id"]]
+    if not all(can_view(viewer, w, "time_off") for w in team):
+        return _deny(f"the time off of {manager['descriptor']}'s team")
+    team_ids = {w["id"] for w in team}
 
     rows = [
         {
@@ -202,7 +239,7 @@ def get_team_time_off(
             "balance": b["balance"],
         }
         for b in TIME_OFF_BALANCES
-        if b["worker"]["id"] in team and b["timeOffPlan"] == time_off_plan
+        if b["worker"]["id"] in team_ids and b["timeOffPlan"] == time_off_plan
     ]
 
     if threshold is not None:
@@ -223,6 +260,33 @@ def get_team_time_off(
         "matched": len(rows),
         "workers": rows,
         "inclusive": inclusive,
+    }
+
+def get_compensation(
+        name: Annotated[str, Field(description="Full or partial name, or the workerId, of the employee, e.g. 'Carol Bahl' or '10011'.")]
+    ) -> dict:
+    """Return one employee's current annual base pay and currency, given their name or workerId."""
+
+    viewer = current_user()
+    if viewer is None:
+        return _deny("employee information (no signed-in user)")
+
+    worker = _find_worker(name)
+    if "error" in worker:
+        return worker
+
+    if not can_view(viewer, worker, "compensation"):      
+        return _deny(f"{worker['descriptor']}'s compensation")
+
+    record = next((c for c in COMPENSATION if c["worker"]["id"] == worker["id"]), None)
+    if record is None:
+        return {"error": f"No compensation record for {worker['descriptor']}."}
+
+    return {
+        "name": worker["descriptor"],
+        "workerId": worker["workerId"],
+        "annualBasePay": record["annualBasePay"],
+        "currency": record["currency"],
     }
 
 # No Longer needed as the MCP server handles this now. The model never runs this code. It only reads the schema and replies with "please call get_worker with these arguments". Your program does the calling.
@@ -358,11 +422,11 @@ def get_team_time_off(
 #     return json.dumps(TOOLS[name](**arguments), ensure_ascii=False)
 
 
-if __name__ == "__main__":
+# if __name__ == "__main__":
     # Pretend to be the model: these are the requests it would send back.
 
     # print("--- get_worker ---")
-    print(run_tool("get_worker", {"name": "Carol Bahl"}))
+    # print(run_tool("get_worker", {"name": "Carol Bahl"}))
     # print(run_tool("get_worker", {"name": "10011"}))               # by ID
     # print(run_tool("get_worker", {"name": 10011}))                 # ID sent as a number
     # print(run_tool("get_worker", {"name": "an"})[:300])            # ambiguous: candidates with IDs
@@ -385,7 +449,7 @@ if __name__ == "__main__":
 
     # print("--- get_team_time_off ---")
     # print(run_tool("get_team_time_off", {"manager_name": "Tom Davis", "time_off_plan": "Vacation", "threshold": 5}))
-    print(run_tool("get_team_time_off", {"manager_name": "Tom Davis", "time_off_plan": "Vacation"}))
+    # print(run_tool("get_team_time_off", {"manager_name": "Tom Davis", "time_off_plan": "Vacation"}))
     # print(run_tool("get_team_time_off", {"manager_name": "Carol Bahl", "time_off_plan": "Vacation"}))
     # print(run_tool("get_team_time_off", {"manager_name": "Tom Davis", "time_off_plan": "Vacations"}))
     # print(run_tool("get_team_time_off", {"manager_name": "Zzyzx", "time_off_plan": "Vacation"}))

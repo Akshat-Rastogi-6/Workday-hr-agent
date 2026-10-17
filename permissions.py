@@ -1,6 +1,6 @@
 """Who is asking, and what are they allowed to see."""
 import os
-from tools import WORKERS, WORKERS_BY_ID
+from data import WORKERS, WORKERS_BY_ID
 
 DOMAINS = {"directory", "time_off", "compensation"}
 HR_TITLES = {"HR Partner"}
