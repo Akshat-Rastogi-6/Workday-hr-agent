@@ -94,7 +94,7 @@ async def main():
     ok_all = sum(ok for ok, _ in totals.values())
     print(f"  {'TOTAL':<12} {ok_all}/{len(CASES)} ({ok_all / len(CASES):.0%})")
 
-    out = HERE / "results_C3.json"
+    out = HERE / "results_D1.json"
     out.write_text(json.dumps(records, indent=2, ensure_ascii=False), encoding="utf-8")
     print(f"\nFull results saved to {out}")
 

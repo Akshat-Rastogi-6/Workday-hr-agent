@@ -67,12 +67,15 @@ client = genai.Client(api_key=os.getenv("GEMINI_API_KEY")) #reads GEMINI_API_KEY
 
 MAX_STEPS = 6
 
+
+
 def server_params(user_id: str) -> StdioServerParameters:
     return StdioServerParameters(
         command=sys.executable,
         args=[str(HERE / "server.py")],
         cwd=str(HERE),
-        env={"WORKDAY_USER": user_id},
+        env={"WORKDAY_USER": user_id,
+             "WORKDAY_BACKEND": os.getenv("WORKDAY_BACKEND", "mock")},
     )
 
 def clean_schema(schema):
@@ -180,7 +183,8 @@ async def main():
         me = await call_mcp_tool(mcp_client, "who_am_i", {})
         me = json.loads(me)
         if "error" in me:
-            print(f"Could not sign in as {args.user}: {me.get('message', me['error'])}")
+            print(f"Could not sign in as {args.user}.In tenant mode, --as must match the "
+                    f"user the Workday credentials belong to.")
             return
         print(f"Signed in as {me['name']} ({me['workerId']})")
 

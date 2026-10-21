@@ -1,3 +1,7 @@
+from pathlib import Path
+from dotenv import load_dotenv
+load_dotenv(Path(__file__).resolve().parent / ".env")
+
 from mcp.server import MCPServer
 from tools import get_team_time_off, get_worker, get_direct_reports, get_time_off_balance, search_workers, get_compensation, who_am_i
 

@@ -1,48 +1,70 @@
-"""Who is asking, and what are they allowed to see."""
+"""Who is asking, and what are they allowed to see.
+
+Works on the shared Worker shape from backends.base, so it is the same
+for every backend (mock today, Workday tenant later).
+"""
 import os
-from data import WORKERS, WORKERS_BY_ID
+
+from backends import get_backend
 
 DOMAINS = {"directory", "time_off", "compensation"}
-HR_TITLES = {"HR Partner"}
+HR_TITLES = set(t.strip() for t in os.getenv("HR_TITLES", "HR Partner").split(",") if t.strip())
+
 
 def current_user() -> dict | None:
-    """Read the workerId from the WORKDAY_USER env var and return that worker's raw record.
-    Return None if it's unset or doesn't match anyone (fail closed)."""
-    worker_id = os.getenv("WORKDAY_USER")
-    return next((w for w in WORKERS if w["workerId"] == worker_id), None)
+    """The signed-in user's Worker.
+    Mock: from WORKDAY_USER. Tenant: from the token (WORKDAY_USER must match it, or nobody is signed in)."""
+    backend = get_backend()
+    claimed = os.getenv("WORKDAY_USER")
+    actual = backend.current_user_id()            # None for the mock
+    if actual is not None:
+        if claimed and claimed != actual:
+            return None                            # --as disagrees with the token: fail closed
+        return backend.get_worker(actual)
+    if not claimed:
+        return None
+    return backend.get_worker(claimed)
+
 
 def managers_above(worker: dict) -> list[str]:
+    """workerIds of everyone above this worker: manager, manager's manager, ... up to the top.
+    Stops on a loop or a missing manager record."""
+    backend = get_backend()
     out, seen = [], set()
-    while worker.get("manager"):
-        manager_id = worker["manager"]["id"]
-        if manager_id in seen or manager_id not in WORKERS_BY_ID:
+    manager_id = worker.get("managerId")
+    while manager_id:
+        if manager_id in seen:
+            break
+        manager = backend.get_worker(manager_id)
+        if manager is None:
             break
         seen.add(manager_id)
         out.append(manager_id)
-        worker = WORKERS_BY_ID[manager_id]
+        manager_id = manager.get("managerId")
     return out
 
+
 def can_view(viewer: dict | None, target: dict, domain: str) -> bool:
-    """domain is "directory", "time_off" or "compensation". Implement the table above.
-    Unknown domain -> False."""
+    """Directory: any signed-in user. Time off / compensation: self, anyone above
+    the target in the chain, or HR. Unknown domain or no user -> False."""
     if viewer is None or domain not in DOMAINS:
         return False
-    if viewer["id"] == target["id"]:
+    if viewer["workerId"] == target["workerId"]:
         return True
     if domain == "directory":
         return True
     if domain in ("time_off", "compensation"):
-        return viewer["businessTitle"] in HR_TITLES or viewer["id"] in managers_above(target)
+        return viewer["title"] in HR_TITLES or viewer["workerId"] in managers_above(target)
     return False
 
+
 if __name__ == "__main__":
-    from tools import _find_worker
-    # Find workers by their IDs or names
-    stephanie = _find_worker("10006")       # Stephanie Richardson
-    tom       = _find_worker("10003")     # her manager
-    leanne    = _find_worker("10002")     # Tom's manager
-    hr        = _find_worker("10126")       # any HR Partner
-    other_mgr = _find_worker("10005")     # Gotthold Klapp, a different team
+    b = get_backend()
+    stephanie = b.get_worker("10006")     # Stephanie Richardson
+    tom       = b.get_worker("10003")     # her manager
+    leanne    = b.get_worker("10002")     # Tom's manager
+    hr        = b.get_worker("10126")     # Frank Bal, HR Partner
+    other_mgr = b.get_worker("10005")     # Gotthold Klapp, a different team
 
     checks = [
         (can_view(stephanie, stephanie, "time_off"),     True,  "self"),
@@ -63,6 +85,9 @@ if __name__ == "__main__":
         print("OK  " if got == want else "FAIL", label)
 
     os.environ["WORKDAY_USER"] = "10006"
-    print("OK  " if current_user() and current_user()["descriptor"] == "Stephanie Richardson" else "FAIL", "current_user by workerId")
+    me = current_user()
+    print("OK  " if me and me["name"] == "Stephanie Richardson" else "FAIL", "current_user by workerId")
     os.environ["WORKDAY_USER"] = "99999"
     print("OK  " if current_user() is None else "FAIL", "unknown user, fail closed")
+    os.environ.pop("WORKDAY_USER", None)
+    print("OK  " if current_user() is None else "FAIL", "no WORKDAY_USER, fail closed")
