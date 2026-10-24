@@ -1,4 +1,5 @@
 import sys
+import os
 import json
 import asyncio
 
@@ -10,7 +11,9 @@ from agent import run_turn, to_gemini, server_params, Client, call_mcp_tool
 
 
 HERE = Path(__file__).resolve().parent
-CASES = json.loads((HERE / "cases.json").read_text(encoding="utf-8"))
+CASES_FILE = os.getenv("EVAL_CASES", "cases.json")
+CASES = json.loads((HERE / CASES_FILE).read_text(encoding="utf-8"))
+RESULTS_FILE = os.getenv("EVAL_RESULTS", "results_D2.json")
 
 def score(case: dict, result: dict) -> list[str]:
     reasons = []
@@ -63,7 +66,11 @@ async def main():
                     previous_id = result["interaction_id"]
                 result["calls"] = all_calls
                 reasons = score(case, result)
+                if reasons:
+                    break
         except Exception as e:
+            while hasattr(e, "exceptions"):      # MCP wraps errors in ExceptionGroups
+                e = e.exceptions[0]
             result = {"answer": None, "calls": all_calls, "stopped": True}
             reasons = [f"crashed: {type(e).__name__}: {e}"]
 
@@ -94,7 +101,7 @@ async def main():
     ok_all = sum(ok for ok, _ in totals.values())
     print(f"  {'TOTAL':<12} {ok_all}/{len(CASES)} ({ok_all / len(CASES):.0%})")
 
-    out = HERE / "results_D1.json"
+    out = HERE / RESULTS_FILE
     out.write_text(json.dumps(records, indent=2, ensure_ascii=False), encoding="utf-8")
     print(f"\nFull results saved to {out}")
 
