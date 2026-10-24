@@ -1,33 +1,3 @@
-"""
-Employee HR Agent
-=================
-
-Short description:
-    Uses Gemini and MCP-provided HR tools to answer questions about employees.
-
-Process:
-    1. Connect to the MCP server and load its available tools.
-    2. Send the user's question and tool definitions to Gemini.
-    3. Execute any tools requested by Gemini through the MCP client.
-    4. Return each tool result to Gemini until it produces an answer or the
-       maximum number of steps is reached.
-    5. Preserve the interaction ID so follow-up questions can continue the
-       conversation.
-    6. Runs as one signed-in user (--as workerId). The server enforces what that user may see 
-
-Functions:
-    clean_schema:
-        Simplifies MCP JSON schemas for Gemini compatibility.
-    to_gemini:
-        Converts an MCP tool definition into a Gemini function declaration.
-    call_mcp_tool:
-        Calls an MCP tool and formats its result as text or an error payload.
-    run_turn:
-        Processes one user question, including Gemini responses and tool calls.
-    main:
-        Starts the MCP connection and runs the interactive question loop.
-"""
-
 import os
 import sys
 import asyncio

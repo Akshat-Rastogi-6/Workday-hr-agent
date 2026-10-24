@@ -2,3 +2,6 @@
 __pycache__/
 fix_encoding.py
 samples/**
+.venv/
+evals/results_T*.json
+evals/cases_tenant.json
